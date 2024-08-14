@@ -1,0 +1,194 @@
+[
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/JSONException.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/JSONException.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/JSONException.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/JSONException.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/JSONFactory.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/JSONFactory.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/JSONFactory.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/JSONFactory.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/JSONManager.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/JSONManager.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/JSONManager.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/JSONManager.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/JSONParser.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/JSONParser.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/JSONParser.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/JSONParser.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/JSONValidator.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/JSONValidator.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/JSONValidator.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/JSONValidator.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/Startup.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/Startup.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/Startup.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/Startup.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/CloseCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/CloseCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/CloseCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/CloseCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/Command.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/Command.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/Command.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/Command.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/CommandHandler.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/CommandHandler.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/CommandHandler.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/CommandHandler.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/ContainsCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/ContainsCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/ContainsCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/ContainsCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/CreateCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/CreateCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/CreateCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/CreateCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/DeleteCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/DeleteCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/DeleteCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/DeleteCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/ExitCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/ExitCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/ExitCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/ExitCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/MoveCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/MoveCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/MoveCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/MoveCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/OpenCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/OpenCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/OpenCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/OpenCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/PrintCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/PrintCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/PrintCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/PrintCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/SaveAsCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SaveAsCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SaveAsCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/SaveAsCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/SaveCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SaveCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SaveCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/SaveCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/SearchCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SearchCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SearchCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/SearchCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/SetCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SetCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/SetCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/SetCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/commands/ValidateCommand.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/commands/ValidateCommand.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/commands/ValidateCommand.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/commands/ValidateCommand.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONArray.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONArray.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONArray.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONArray.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONBool.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONBool.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONBool.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONBool.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONKeyPair.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONKeyPair.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONKeyPair.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONKeyPair.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONNull.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONNull.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONNull.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONNull.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONNumber.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONNumber.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONNumber.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONNumber.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONObject.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONObject.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONObject.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONObject.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONString.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONString.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONString.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONString.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/json_types/JSONValue.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONValue.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/json_types/JSONValue.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/json_types/JSONValue.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/utility/Helpers.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/utility/Helpers.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/utility/Helpers.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/utility/Helpers.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/source/utility/String.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/source/utility/String.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/source/utility/String.cpp",
+  "output": "CMakeFiles/json_parser.dir/source/utility/String.cpp.o"
+},
+{
+  "directory": "/Users/mihaildechev/Desktop/JSON_PARSER/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/mihaildechev/Desktop/JSON_PARSER/includes -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/json_parser.dir/main.cpp.o -c /Users/mihaildechev/Desktop/JSON_PARSER/main.cpp",
+  "file": "/Users/mihaildechev/Desktop/JSON_PARSER/main.cpp",
+  "output": "CMakeFiles/json_parser.dir/main.cpp.o"
+}
+]

@@ -1,0 +1,82 @@
+#include "../includes/JSONFactory.hpp"
+#include "../includes/json_types/JSONArray.hpp"
+#include "../includes/JSONException.hpp"
+#include "../includes/json_types/JSONObject.hpp"
+#include "../includes/JSONParser.hpp"
+#include "../includes/json_types/JSONNumber.hpp"
+#include "../includes/json_types/JSONBool.hpp"
+#include "../includes/json_types/JSONNull.hpp"
+#include "../includes/json_types/JSONString.hpp"
+#include "../includes/utility/Constants.hpp"
+
+JSONFactory& JSONFactory::getFactory() {
+    static JSONFactory theFactroy;
+    return theFactroy;
+}
+
+JSONValue* JSONFactory::createValue(std::istream& inputStream) {
+    char firstChar;
+    inputStream >> firstChar;
+    
+    inputStream.unget();
+
+    if (firstChar == '-' || (firstChar >= '0' && firstChar <= '9'))
+        return createNumber(inputStream);
+    else if (firstChar == 'n') 
+        return createNull(inputStream);
+    else if (firstChar == 't' || firstChar == 'f') 
+        return createBool(inputStream);
+    else if (firstChar == DOUBLE_QUOTE) 
+        return createString(inputStream);
+    else if (firstChar == ARRAY_OPENING_BRACKET)
+        return createArray(inputStream);
+    else if (firstChar == OBJECT_OPENING_BRACKET)
+        return createObject(inputStream);
+    else {
+        throw CreationError("Unknown charachter in factory");
+    }
+}
+
+
+JSONValue* JSONFactory::createNumber(std::istream &inputStream) {
+    return new JSONNumber(JSONParser::parseNumber(inputStream));
+}
+
+JSONValue* JSONFactory::createBool(std::istream &inputStream) {
+    return new JSONBool(JSONParser::parseBool(inputStream));
+}
+
+JSONValue* JSONFactory::createNull(std::istream &inputStream) {
+    //this method was written fully by Claude AI 
+    String nullStr;
+    char character;
+    for (int i = 0; i < 4; ++i) {
+        if (inputStream.get(character)) {
+            nullStr += character;
+        } else {
+            break;
+        }
+    }
+    
+    if (nullStr == "null") {
+        return new JSONNull;
+    } else {
+        throw CreationError("Failed to create null value");
+    }
+}
+
+JSONValue* JSONFactory::createString(std::istream &inputStream) {
+    return new JSONString(JSONParser::parseString(inputStream));
+}
+
+JSONValue* JSONFactory::createArray(std::istream& inputStream) {
+    JSONArray* resultArray = new JSONArray();
+    JSONParser::parseArray(inputStream, resultArray);
+    return resultArray;
+}
+
+JSONValue* JSONFactory::createObject(std::istream &inputStream) {
+    JSONObject* resultObject = new JSONObject;
+    JSONParser::parseObject(inputStream, resultObject);
+    return resultObject;
+}

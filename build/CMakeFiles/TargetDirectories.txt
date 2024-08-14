@@ -1,0 +1,7 @@
+/Users/mihaildechev/Desktop/JSON_PARSER/build/CMakeFiles/json_parser.dir
+/Users/mihaildechev/Desktop/JSON_PARSER/build/CMakeFiles/edit_cache.dir
+/Users/mihaildechev/Desktop/JSON_PARSER/build/CMakeFiles/rebuild_cache.dir
+/Users/mihaildechev/Desktop/JSON_PARSER/build/CMakeFiles/list_install_components.dir
+/Users/mihaildechev/Desktop/JSON_PARSER/build/CMakeFiles/install.dir
+/Users/mihaildechev/Desktop/JSON_PARSER/build/CMakeFiles/install/local.dir
+/Users/mihaildechev/Desktop/JSON_PARSER/build/CMakeFiles/install/strip.dir
