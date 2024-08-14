@@ -13,8 +13,6 @@ public:
 
     JSONKeyPair& operator=(const JSONKeyPair& other);
 
-    JSONKeyPair* clone() const;
-
     void print(std::ostream& outputStream = std::cout, size_t indent = 0) const;
 
     void search(const String& key, Vector<JSONValue*>& searchResultsArray) const;
