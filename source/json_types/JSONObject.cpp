@@ -1,7 +1,5 @@
 #include "../../includes/json_types/JSONObject.hpp"
 #include "../../includes/utility/Constants.hpp"
-#include "JSONException.hpp"
-#include "utility/Vector.hpp"
 
 JSONObject::JSONObject(const JSONObject& other) {
     copy(other);
@@ -83,14 +81,11 @@ void JSONObject::set(const Vector<String> &path, JSONValue *const value) {
     }
 }
 
-
-//Claude Ai create update fo work with move
 void JSONObject::create(const Vector<String>& path, JSONValue* const value) {
     if (path.IsEmpty()) {
         throw InvalidPathError("Empty path for create operation in object");
     }
 
-    // String currentKey = path[0];
     JSONKeyPair* pair = nullptr;
     try {
         pair = getPair(path[0]);
@@ -104,8 +99,7 @@ void JSONObject::create(const Vector<String>& path, JSONValue* const value) {
             // Create an intermediate object
             JSONObject* newObject = new JSONObject;
             addPair(path[0], newObject);
-            pair = getPair(path[0]);
-            // pair = getPair(currentKey)->clone();
+            pair = getPair(path[0])->clone();
         }
     }
 
@@ -144,7 +138,6 @@ void JSONObject::remove(const Vector<String> &path) {
     }
 }
 
-
 bool JSONObject::contains(const String &value) const {   
     for (size_t i = 0; i < values.Size(); i++) {
         if (values[i]->getValue()->contains(value) ||
@@ -154,61 +147,6 @@ bool JSONObject::contains(const String &value) const {
     }
     return false;
 }
-
-
-// claude ai move second try
-// void JSONObject::move(const Vector<String> &fromPath, const Vector<String> toPath) {
-//     if (fromPath.IsEmpty() || toPath.IsEmpty()) {
-//         throw InvalidPathError("Invalid path for move operation");
-//     }
-
-//     JSONKeyPair* fromPair = nullptr;
-//     try {
-//         fromPair = getPair(fromPath[0]);
-//     } catch (const KeyNotFound&) {
-//         throw InvalidPathError("Source path not found");
-//     }
-
-//     if (fromPath.Size() == 1) {
-//         JSONValue* valueToMove = fromPair->getValue()->clone();
-//         removePair(fromPath[0]);  // Remove the pair from the source location
-
-//         try {
-//             if (toPath.Size() == 1) {
-//                 addPair(toPath[0], valueToMove);
-//             } else {
-//                 // Handle nested destination
-//                 JSONObject* currentObj = this;
-//                 for (size_t i = 0; i < toPath.Size() - 1; ++i) {
-//                     JSONKeyPair* pair = nullptr;
-//                     try {
-//                         pair = currentObj->getPair(toPath[i]);
-//                     } catch (const KeyNotFound&) {
-//                         JSONObject* newObj = new JSONObject();
-//                         currentObj->addPair(toPath[i], newObj);
-//                         pair = currentObj->getPair(toPath[i]);
-//                     }
-//                     currentObj = dynamic_cast<JSONObject*>(pair->getValue());
-//                     if (!currentObj) {
-//                         throw InvalidPathError("Invalid destination path");
-//                     }
-//                 }
-//                 currentObj->addPair(toPath[toPath.Size() - 1], valueToMove);
-//             }
-//         } catch (const JSONException& e) {
-//             // If creation fails, restore the original pair
-//             addPair(fromPath[0], valueToMove);
-//             throw;
-//         }
-//     } else {
-//         Vector<String> subFrom;
-//         for (size_t i = 1; i < fromPath.Size(); i++) {
-//             subFrom.PushBack(fromPath[i]);
-//         }
-
-//         fromPair->getValue()->move(subFrom, toPath);
-//     }
-// }
 
 const JSONKeyPair* JSONObject::getPair(const String& key) const {
     return values[getValueIndex(key)];
@@ -233,15 +171,6 @@ void JSONObject::addPair(const String& key, JSONValue *value) {
 
 void JSONObject::removePair(const String &key) {
     values.EraseAt(getValueIndex(key));
-}
-
-bool JSONObject::setValue(const String& key, JSONValue *value) {
-    JSONKeyPair* pair = getPair(key);
-    if (pair) {
-        pair->setValue(value);
-        return true;
-    } 
-    return false;
 }
 
 size_t JSONObject::getValueIndex(const String& key) const {

@@ -42,8 +42,6 @@ public:
     void addPair(const String& key, JSONValue* value);    
     void removePair(const String& key);
 
-    bool setValue(const String& key, JSONValue* value);
-
 private:
     size_t getValueIndex(const String& key) const;
     void copy(const JSONObject& other);
