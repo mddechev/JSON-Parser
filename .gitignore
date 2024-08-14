@@ -9,3 +9,7 @@ build/
 
 #ignore the compiled main executable
 main
+
+#ignore the move command files
+includes/commands/MoveCommand.hpp
+source/commands/MoveCommand.cpp
