@@ -12,5 +12,7 @@ main
 
 #ignore the move command files
 includes/commands/MoveCommand.hpp
-source/commands/MoveCommand.cpp.DS_Store
+source/commands/MoveCommand.cpp.
+
+DS_Store
 .DS_Store?
