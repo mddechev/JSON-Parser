@@ -1,5 +1,0 @@
-test validation
-test parsing
-test factory
-test manager
-test handler
