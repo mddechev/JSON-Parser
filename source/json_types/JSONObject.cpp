@@ -57,7 +57,6 @@ void JSONObject::search(const String &key, Vector<JSONValue*>& searchResultsArra
 }
 
 void JSONObject::set(const Vector<String> &path, JSONValue *const value) {
-    //claude ai
     if (path.IsEmpty()) {
         throw InvalidPathError("Empty path for object");
     }
@@ -99,7 +98,9 @@ void JSONObject::create(const Vector<String>& path, JSONValue* const value) {
             // Create an intermediate object
             JSONObject* newObject = new JSONObject;
             addPair(path[0], newObject);
-            pair = getPair(path[0])->clone();
+            // pair = getPair(path[0])->clone();
+            pair = getPair(path[0]);
+
         }
     }
 
@@ -186,7 +187,8 @@ void JSONObject::copy(const JSONObject& other) {
     this->values.Reserve(other.getValues().Size());
 
     for (size_t i = 0; i < other.getValues().Size(); i++) {
-        this->values.PushBack(other.getValues()[i]->clone());
+        // this->values.PushBack(other.getValues()[i]->clone());
+        this->values.PushBack(other.getValues()[i]);
     }
 }
 
