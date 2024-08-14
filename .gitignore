@@ -1,0 +1,11 @@
+#Ignore build folder
+build/
+
+#ignore .cache foldr
+.cache/
+
+#ignore compiled object files
+*.object
+
+#ignore the compiled main executable
+main
