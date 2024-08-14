@@ -13,7 +13,6 @@ void testNumberCreation(const String& JSONtext) {
         std::cout << "Successfull number creation" << "\n\n";
         delete value;
     } catch (const CreationError& e) {
-        delete value;
         std::cerr << e.what() << '\n';
     }
 }
@@ -29,7 +28,6 @@ void testBoolCreation(const String& JSONtext) {
         std::cout << "Successfull bool creation" << "\n\n";
         delete value;
     } catch (const CreationError& e) {
-        delete value;
         std::cerr << e.what() << '\n';
     }
 }
@@ -45,7 +43,6 @@ void testStringCreation(const String& JSONtext) {
         std::cout << "Successfull string creation" << "\n\n";
         delete value;
     } catch (const CreationError& e) {
-        delete value;
         std::cerr << e.what() << '\n';
     }
 }
@@ -61,7 +58,6 @@ void testNullCreation(const String& JSONtext) {
         std::cout << "Successfull null creation" << "\n\n";
         delete value;
     } catch (const CreationError& e) {
-        delete value;
         std::cerr << e.what() << '\n';
     }
 }
@@ -77,7 +73,6 @@ void testObjectCreation(const String& JSONtext) {
         std::cout << "Successfull object creation" << "\n\n";
         delete value;
     } catch (const CreationError& e) {
-        delete value;
         std::cerr << e.what() << '\n';
     }
 }
@@ -93,7 +88,6 @@ void testArrayCreation(const String& JSONtext) {
         std::cout << "Successfull array creation" << "\n\n";
         delete value;
     } catch (const CreationError& e) {
-        delete value;
         std::cerr << e.what() << '\n';
     }
 }
@@ -109,7 +103,6 @@ void testValueCreation(const String& JSONtext) {
         std::cout << "Successfull value creation" << "\n\n";
         delete value;
     } catch (const CreationError& e) {
-        delete value;
         std::cerr << e.what() << '\n';
     }
 }
