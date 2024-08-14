@@ -117,7 +117,7 @@ void testCreate(const String& filePath, const String& valuePath, JSONValue* cons
     }
 }
 
-void testCreateWithIss(const String& filePath, const String& valuePath, const String& JSONtext) {
+void testCreateWithInuptStringStream(const String& filePath, const String& valuePath, const String& JSONtext) {
     JSONManager manager;
     InputStringStream inputStream(JSONtext);
     JSONValue* value = JSONFactory::getFactory().createValue(inputStream);
@@ -168,10 +168,8 @@ void testRemove(const String& filePath, const String& valuePath) {
     }
 }
 
-void testContains(const String& filePath, const String& value) {
-
-}
 
 int main() {
+    testOpen("../JSONfiles/file.json");
     return 0;
 }
