@@ -22,10 +22,6 @@ JSONKeyPair& JSONKeyPair::operator=(const JSONKeyPair &other) {
     return *this;
 }
 
-JSONKeyPair* JSONKeyPair::clone() const {
-    return new JSONKeyPair(*this);
-}
-
 void JSONKeyPair::print(std::ostream& outputStream, size_t indent) const {
         printIndent(outputStream, indent);
         outputStream << "\"" << key << "\": ";
@@ -89,32 +85,6 @@ void JSONKeyPair::remove(const Vector<String> &path) {
 bool JSONKeyPair::contains(const String &value) const {
     return this->value->contains(value);
 }
-
-// void JSONKeyPair::move(const Vector<String> &from, const Vector<String> &to) {
-//     if (from.IsEmpty()) {
-//         throw InvalidPathError("Invalid source path for move operation in key-pair");
-//     }
-
-//     if (from.Size() == 1) {
-//         //we are moving the entire value of this key-pair
-//         if (to.IsEmpty()) {
-//             throw InvalidPathError("Invalid destination path for key - pair");
-//         }
-//         //the actual move will be handled by the parent class
-//         return;
-//     }
-
-//     Vector<String> subFrom;
-//     for (size_t i = 1; i < from.Size(); i++) {
-//         subFrom.PushBack(from[i]);
-//     }
-
-//     if (this->value) {
-//         this->value->move(subFrom, to);
-//     } else {
-//         throw JSONException("Cannot move from null value");
-//     }
-// }
 
 void JSONKeyPair::setValue(JSONValue *value) {
     free();
