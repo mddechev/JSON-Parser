@@ -9,15 +9,15 @@ class JSONFactory {
 public:
     static JSONFactory& getFactory();
 
-    JSONValue* createValue(std::istream& is);
+    JSONValue* createValue(std::istream& inputStream);
 
 private:
-    JSONValue* createNumber(std::istream& is);
-    JSONValue* createBool(std::istream& is);
-    JSONValue* createNull(std::istream& is);
-    JSONValue* createString(std::istream& is);
-    JSONValue* createArray(std::istream& is);
-    JSONValue* createObject(std::istream& is);
+    JSONValue* createNumber(std::istream& inputStream);
+    JSONValue* createBool(std::istream& inputStream);
+    JSONValue* createNull(std::istream& inputStream);
+    JSONValue* createString(std::istream& inputStream);
+    JSONValue* createArray(std::istream& inputStream);
+    JSONValue* createObject(std::istream& inputStream);
 
 private:
     JSONFactory() = default;
