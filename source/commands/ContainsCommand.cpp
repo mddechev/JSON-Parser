@@ -9,10 +9,10 @@ bool ContainsCommand::execute(const Vector<String>& tokenizedCommand) {
         return false;
     }
     if (getManagerPtr()->contains(tokenizedCommand[1])) {
-        std::cout << "True\n";
+        std::cout << "True" << '\n';
         return true;
     } 
-    std::cout << "False\n";
+    std::cout << "False" << '\n';
     return true;
 }
 
