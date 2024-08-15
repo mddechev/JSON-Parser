@@ -23,11 +23,11 @@ namespace helpers {
    
     void getLine(std::istream& inputStream, String& result, size_t length, const char delimiter) {
         result.Reuse();
-        char ch;
+        char character;
         size_t count = 0;
 
-        while (count < length && inputStream.get(ch) && ch != delimiter) {
-            result += ch;
+        while (count < length && inputStream.get(character) && character != delimiter) {
+            result += character;
             ++count;
         }    
     }
