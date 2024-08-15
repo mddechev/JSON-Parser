@@ -28,11 +28,8 @@ CommandHandler::CommandHandler(JSONManager* const managerPtr) {
         new SetCommand(managerPtr),
         new CreateCommand(managerPtr),
         new DeleteCommand(managerPtr),
-        // new MoveCommand(managerPtr)
     };
     
-    // int size = sizeof(supportedCommands) / sizeof(supportedCommands[0]);
-
     for (size_t i = 0; i < SUPPORTED_COMMANDS_COUNT; i++) {
         this->supportedCommands.PushBack(supportedCommands[i]);
     }
