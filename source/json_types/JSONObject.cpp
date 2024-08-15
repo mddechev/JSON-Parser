@@ -9,6 +9,7 @@ JSONObject::~JSONObject() noexcept {
     free();
 }
 
+clone()
 JSONObject& JSONObject::operator=(const JSONObject &other) {
     if (this != &other) {
         free();
@@ -63,13 +64,13 @@ void JSONObject::set(const Vector<String> &path, JSONValue *const value) {
     JSONKeyPair* pair = getPair(path[0]);
     if (!pair) {
         if (path.Size() == 1) {
-            addPair(path[0], value->clone());
+            addPair(path[0], value);
         } else {
             throw InvalidPathError("Path nout found");
         }
     } else {
         if (path.Size() == 1) {
-            pair->setValue(value->clone());
+            pair->setValue(value);
         } else {
             Vector<String> subPath;
             for (size_t i = 1; i < path.Size(); i++) {
@@ -92,13 +93,12 @@ void JSONObject::create(const Vector<String>& path, JSONValue* const value) {
         // Key not found, which is expected for creation
         if (path.Size() == 1) {
             // If it's the last part of the path, add the new value
-            addPair(path[0], value->clone());
+            addPair(path[0], value);
             return;
         } else {
             // Create an intermediate object
             JSONObject* newObject = new JSONObject;
             addPair(path[0], newObject);
-            // pair = getPair(path[0])->clone();
             pair = getPair(path[0]);
 
         }
@@ -108,7 +108,7 @@ void JSONObject::create(const Vector<String>& path, JSONValue* const value) {
         if (pair) {
             throw JSONException("Element already exists");
         }
-        addPair(path[0], value->clone());
+        addPair(path[0], value);
     } else {
         if (!pair) {
             throw KeyNotFound("Key not found in object", path[0]);
@@ -167,7 +167,7 @@ JSONValue* JSONObject::getValue(const String &key) {
 }
 
 void JSONObject::addPair(const String& key, JSONValue *value) {
-    values.PushBack(new JSONKeyPair(key, value));
+    values.PushBack(new JSONKeyPair(key, value->clone()));
 }
 
 void JSONObject::removePair(const String &key) {
@@ -187,7 +187,6 @@ void JSONObject::copy(const JSONObject& other) {
     this->values.Reserve(other.getValues().Size());
 
     for (size_t i = 0; i < other.getValues().Size(); i++) {
-        // this->values.PushBack(other.getValues()[i]->clone());
         this->values.PushBack(other.getValues()[i]);
     }
 }
