@@ -145,53 +145,6 @@ bool JSONArray::contains(const String &value) const {
     return false;
 }
 
-// void JSONArray::move(const Vector<String> &from, const Vector<String> to) {
-//     if (from.IsEmpty() || to.IsEmpty()) {
-//         throw InvalidPathError("Invalid path for move operation");
-//     }
-
-//     //get the val at the fromPath
-//     JSONValue* valueToMove = nullptr;
-//     size_t fromIndex;
-//     try {
-//         fromIndex = std::stoul(from[0].C_str());
-//         valueToMove = this->getValue(fromIndex);
-        
-//         Vector<String> subFrom;
-//         for (size_t i = 1; i < from.Size(); i++) {
-//             subFrom.PushBack(from[i]);
-//         }
-//         if (!subFrom.IsEmpty()) {
-//             valueToMove->move(subFrom, to);
-//             return;
-//         }
-//     } catch (const std::exception& e) {
-//         std::cerr << "Exception: " << e.what() << '\n';
-//         throw InvalidPathError("Invalid array index"); 
-//     }
-
-//     if (!valueToMove) {
-//         throw ElementNotFound("Value to move not found");
-//     }
-
-//     //create copy of value to move
-//     JSONValue* valueCopy = valueToMove->clone();
-
-//     //remove the original value
-//     this->removeValue(fromIndex);
-
-//     //create the new value at the to path
-//     try {
-//         this->create(to, valueCopy);
-//     } catch (const JSONException& e) {
-//         this->addValue(valueToMove);
-//         delete valueCopy;
-//         throw;
-//     }
-
-//     delete valueCopy;
-// }
-
 void JSONArray::addValue(JSONValue* const value) {
     values.PushBack(value);
 }
