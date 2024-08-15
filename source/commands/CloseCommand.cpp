@@ -1,10 +1,10 @@
 #include "../includes/commands/CloseCommand.hpp"
 
-CloseCommand::CloseCommand(JSONManager* const manager)
-    :Command(CLOSE_COMMAND_NAME, manager) {}
+CloseCommand::CloseCommand(JSONManager* const managerPtr)
+    :Command(CLOSE_COMMAND_NAME, managerPtr) {}
 
-bool CloseCommand::execute(const Vector<String>& tokenizedCmd) {
-    if (!validate(tokenizedCmd)) {
+bool CloseCommand::execute(const Vector<String>& tokenizedCommand) {
+    if (!validate(tokenizedCommand)) {
         return false;
     }
     
@@ -31,8 +31,8 @@ bool CloseCommand::execute(const Vector<String>& tokenizedCmd) {
     return true;
 }
 
-bool CloseCommand::validate(const Vector<String>& tokenizedCmd) {
-    if ((tokenizedCmd.Size() == 1) && (tokenizedCmd[0] == getCommandName())) {
+bool CloseCommand::validate(const Vector<String>& tokenizedCommand) {
+    if ((tokenizedCommand.Size() == 1) && (tokenizedCommand[0] == getCommandName())) {
         return true;
     }
     return false;
