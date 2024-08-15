@@ -13,19 +13,16 @@
 template<typename T>
 class Vector {
 public:
-//ctors
     Vector();
     Vector(size_t capacity);
-    Vector(size_t capacity, const T& defaultVal);
-    // template<typename ...Args>
-    // Vector(Args&&... args);
+    Vector(size_t capacity, const T& defaultValue);
     ~Vector();
 
     Vector(const Vector<T>& other);
     Vector& operator=(const Vector& other);
     Vector(Vector<T>&& other);
     Vector& operator=(Vector<T>&& other);
-//methods
+
     T& operator[](size_t position);
     const T& operator[](size_t position) const;
 
@@ -39,8 +36,6 @@ public:
     void PushBack(const T& value);
     void PushBack(T&& value);
 
-    // template<typename... Args>
-    // std::enable_if<std::is_constructible<T,  Args...>::value, void> EmplaceBack(Args&&... args);
     const T& At(size_t index) const;
     T& At(size_t index);
 
@@ -49,25 +44,24 @@ public:
     void EraseAt(size_t position);
     void Insert(size_t position, const T& value);
     void Clear();
-    void Print(std::ostream& os = std::cout, const char delimeter = ' ') const;
+    void Print(std::ostream& outputStream = std::cout, const char delimiter = ' ') const;
 
     bool Contains(const T& value) const;
     bool IsEmpty() const;
 
-    void Reserve(size_t newCap);
-//helpers
+    void Reserve(size_t newCapacity);
+
 private:
-    void Resize();
+    void Resize(size_t step = INCREMENT_STEP);
     void Copy(const Vector<T>& other);
     void Move(Vector<T>&& other);
     void Free();
-//statics
+
 private:
     static const size_t INITIAL_CAPACITY = 4;
     static const size_t INITIAL_SIZE = 0;
     static const size_t INCREMENT_STEP = 2;
 
-//fields
 private:
     T* data;
     size_t capacity;
@@ -176,11 +170,6 @@ void Vector<T>::PushBack(T&& value) {
     data[size++] = std::move(value);
 }
 
-// template<typename T>
-// template<typename... Args>
-// std::enable_if<std::is_constructible<T, Args...>::value, void> Vector<T>::EmplaceBack(Args&&... args) {
-//     PushBack(T(std::forward<Args>(args)...));
-// }
 template<typename T>
 const T& Vector<T>::At(size_t index) const {
     return data[index];
@@ -244,9 +233,9 @@ void Vector<T>::Clear() {
 }
 
 template<typename T>
-void Vector<T>::Print(std::ostream& os, const char delimeter) const {
+void Vector<T>::Print(std::ostream& outputStream, const char delimeter) const {
     for (size_t i = 0; i < size; i++) {
-        std::cout << data[i] << delimeter;
+        outputStream << data[i] << delimeter;
     }
 }
 
@@ -266,9 +255,9 @@ bool Vector<T>::IsEmpty() const {
 }
 
 template <typename T>
-void Vector<T>::Reserve(size_t newCap) {
-    if (newCap > capacity) {
-        T* newData = new T[newCap];
+void Vector<T>::Reserve(size_t newCapacity) {
+    if (newCapacity > capacity) {
+        T* newData = new T[newCapacity];
         if (!newData) {
             throw std::bad_alloc();
         }
@@ -279,13 +268,13 @@ void Vector<T>::Reserve(size_t newCap) {
 
         Free();
         data = newData;
-        capacity = newCap;
+        capacity = newCapacity;
     }
 }
 
 template<typename T>
-void Vector<T>::Resize() {
-    size_t newCap = capacity * INCREMENT_STEP;
+void Vector<T>::Resize(size_t step) {
+    size_t newCap = capacity * step;
     T* newData = new T[newCap];
     if (!newData) {
         throw std::bad_alloc();
