@@ -59,6 +59,7 @@ void JSONParser::parseArray(std::istream& inputStream, JSONArray* toBeFilledArra
         toBeFilledArray->getValues().PushBack(value);
 
         inputStream >> character;
+
         if (character == ARRAY_CLOSING_BRACKET) {
             break;
         }
@@ -76,6 +77,7 @@ void JSONParser::parseObject(std::istream &inputStream, JSONObject *toBeFilledOb
     while (inputStream.good()) {
         inputStream >> character;
         if (character == OBJECT_CLOSING_BRACKET) {
+            //empty object parsed
             break;
         }
 
@@ -86,9 +88,7 @@ void JSONParser::parseObject(std::istream &inputStream, JSONObject *toBeFilledOb
         inputStream >> character;
         
         JSONValue* value = JSONFactory::getFactory().createValue(inputStream);
-        if (value == nullptr) {
-            throw JSONException("Failed to create value in object");
-        }
+       
         toBeFilledObject->addPair(key, value);
 
         inputStream >> character;
