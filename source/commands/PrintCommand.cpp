@@ -1,7 +1,7 @@
 #include "../includes/commands/PrintCommand.hpp"
 
-PrintCommand::PrintCommand(JSONManager* const manager)
-    :Command(PRINT_COMMAND_NAME, manager) {}
+PrintCommand::PrintCommand(JSONManager* const managerPtr)
+    :Command(PRINT_COMMAND_NAME, managerPtr) {}
 
 bool PrintCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {

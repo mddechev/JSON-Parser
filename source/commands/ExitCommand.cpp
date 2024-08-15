@@ -1,7 +1,7 @@
 #include "../includes/commands/ExitCommand.hpp"
 
-ExitCommand::ExitCommand(JSONManager* const manager)
-    :Command(EXIT_COMMAND_NAME, manager) {}
+ExitCommand::ExitCommand(JSONManager* const managerPtr)
+    :Command(EXIT_COMMAND_NAME, managerPtr) {}
 
 bool ExitCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {

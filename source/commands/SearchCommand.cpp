@@ -2,8 +2,8 @@
 #include <exception>
 #include <stdexcept>
 
-SearchCommand::SearchCommand(JSONManager* const manager)
-    :Command(SEARCH_COMMAND_NAME, manager) {}
+SearchCommand::SearchCommand(JSONManager* const managerPtr)
+    :Command(SEARCH_COMMAND_NAME, managerPtr) {}
 
 bool SearchCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {
