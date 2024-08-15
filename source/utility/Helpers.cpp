@@ -42,4 +42,8 @@ namespace helpers {
                      <<   "║ close                    exit                         ║\n"
                      <<   "╚═══════════════════════════════════════════════════════╝\n\n";
     }
+
+    bool isDigit(const char character) {
+        return character >= '0' && character <= '9';
+    }
 }
