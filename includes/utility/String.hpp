@@ -52,7 +52,7 @@ public:
     bool IsEmpty() const;
     void Clear();
     void Reuse();
-    String Substr(size_t pos = 0, int len = npos) const;
+    String Substr(size_t pos = 0, int len = NPOS) const;
 
     bool Contains(const String& other) const;
     bool Contains(const char* other) const;
@@ -61,7 +61,7 @@ private:
     static const size_t INITIAL_CAPACITY = 4;
     static const size_t INITIAL_SIZE = 0;
     static const size_t INCREMENT_STEP = 2;
-    static const int npos = -1;
+    static const int NPOS = -1;
 
 private:
     void Resize(size_t newCapacity);

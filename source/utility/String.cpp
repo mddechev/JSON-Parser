@@ -227,7 +227,7 @@ String String::Substr(size_t pos, int len) const {
     if (pos >= size) {
         throw std::out_of_range("Position out of range");
     }
-    if (len == npos || pos + len > size) {
+    if (len == NPOS || pos + len > size) {
         len = size - pos;
     }
     char* substrData = new char[len + 1];
