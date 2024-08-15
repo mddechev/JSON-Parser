@@ -19,12 +19,6 @@ file(GLOB_RECURSE SOURCES
 
 # Add the executable
 add_executable(json_parser ${SOURCES} ${PROJECT_SOURCE_DIR}/main.cpp)
-# add_executable(test_parser ${SOURCES} ${PROJECT_SOURCE_DIR}/tests/testParser.cpp)
-# add_executable(test_validation ${SOURCES} ${PROJECT_SOURCE_DIR}/tests/testValidation.cpp)
-# add_executable(test_factory ${SOURCES} ${PROJECT_SOURCE_DIR}/tests/testFactory.cpp)
-# add_executable(test_manager ${SOURCES} ${PROJECT_SOURCE_DIR}/tests/testManager.cpp)
-
-
 
 # Optionally, you can add installation rules
 install(TARGETS json_parser DESTINATION bin)
