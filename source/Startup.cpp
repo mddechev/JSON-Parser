@@ -17,7 +17,7 @@ void Startup::run() {
     try {
         while (true) {
             String command;
-            std::cout << '\n' << ">";
+            std::cout << '\n' << "> ";
             helpers::getLine(std::cin, command);
             
             if (!handler.handle(command)) {
