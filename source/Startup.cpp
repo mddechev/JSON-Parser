@@ -16,19 +16,16 @@ void Startup::run() {
     
     try {
         while (true) {
-            std::cout << "\n\033[1;34m>\033[0m "; // Blue bold prompt
-            // std::cout <<"> ";
+            std::cout << ">";
             String command;
             helpers::getLine(std::cin, command);
             
             if (!handler.handle(command)) {
-                std::cout << "\n\033[1;31mCommand failed. Please try again.\033[0m\n"; // Red error message
-                // std::cout << "\nCommand failed. Please try again\n";
+                std::cout << '\n' << "Command failed. Please try again" << '\n';
             }
         }
     } catch (const std::exception& e) {
-        std::cerr << "\n\033[1;31mError: " << e.what() << "\033[0m\n"; // Red error message
-        // std::cerr << "\nError: " << e.what() << '\n';
+        std::cerr << "\nError: " << e.what() << '\n';
     }
     
     delete manager;
@@ -70,6 +67,6 @@ void Startup::runDemo() {
         manager.close();
     
     } catch (const JSONException& e) {
-        std::cerr << "Exceptio caught: " << e.what() << '\n';
+        std::cerr << "Exception caught: " << e.what() << '\n';
     }
 }
