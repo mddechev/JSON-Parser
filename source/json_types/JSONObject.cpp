@@ -9,7 +9,6 @@ JSONObject::~JSONObject() noexcept {
     free();
 }
 
-clone()
 JSONObject& JSONObject::operator=(const JSONObject &other) {
     if (this != &other) {
         free();
