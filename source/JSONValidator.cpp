@@ -1,13 +1,14 @@
 #include "../includes/JSONValidator.hpp"
 #include "../includes/JSONException.hpp"
 #include "../includes/utility/Constants.hpp"
+#include "utility/Helpers.hpp"
 
 void JSONValidator::validate(std::istream &inputStream) {
     char firstChar;
     while (inputStream.get(firstChar) && std::isspace(firstChar)) {}
 
     if (inputStream.eof()) {
-        return;
+        return; //empty file counts as valid
     }
 
     inputStream.unget();
@@ -27,21 +28,25 @@ void JSONValidator::validateValue(std::istream& inputStream) {
     inputStream >> firstChar;
     inputStream.unget();
 
-    //if(ch == NEGATIVE_NUMBER_CHAR || (ch >= '0' && ch <= '9')
-    if (firstChar == '-' || (firstChar >= '0' && firstChar <= '9')) {
+    if (firstChar == '-' || helpers::isDigit(firstChar)) {
         validateNumber(inputStream);
+
     } else if (firstChar == 'n') {
         validateNull(inputStream);
+
     } else if (firstChar == 't' || firstChar == 'f') {
         validateBool(inputStream);
+
     } else if (firstChar == DOUBLE_QUOTE) {
         validateString(inputStream);
+
     } else if (firstChar == ARRAY_OPENING_BRACKET) {
         validateArray(inputStream);
+
     } else if (firstChar == OBJECT_OPENING_BRACKET) {
         validateObject(inputStream);
-    }
-    else {
+
+    } else {
         throw InvalidJSONSyntax("Invalid value in validator");
     }
 }
@@ -79,7 +84,6 @@ void JSONValidator::validateBool(std::istream &inputStream) {
 }
 
 void JSONValidator::validateString(std::istream &inputStream) {
-    // String result;
     size_t quotesCounter = 0;
 
     char character;
