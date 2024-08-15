@@ -112,7 +112,7 @@ int main() {
     testBoolCreation("true");
     testBoolCreation("false");
     testNullCreation("null");
-    testStringCreation("\this is a string\"");
+    testStringCreation("\"this is a string\"");
     testArrayCreation("[1, true, null, \"string\", [1, 2, 3] ]");
     testObjectCreation("{\"name\": \"Djaro\", \"age\": 56, \"mobBoss\": true}");
     testValueCreation("{\"student\": {\"name\": \"Mihail\", \"age\": 21, \"uni\": {\"name\": \"fmi\", \"minalIzpit\": false} } }");
