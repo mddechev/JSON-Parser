@@ -18,7 +18,7 @@ namespace helpers {
         if (!current.IsEmpty()) {
             result.PushBack(current);
         }
-    return result;
+        return result;
     }
    
     void getLine(std::istream& inputStream, String& result, size_t length, const char delimiter) {
@@ -32,22 +32,8 @@ namespace helpers {
         }    
     }
 
-    // void printInfo(std::ostream& outputStream) {
-    //     outputStream << "...LIST OF COMMANDS..." << "\n\n"
-    //     << "validate path/to/file/file_name"     << "     "   
-    //     << "open path/file/to/file/file_name"    << "     " << "\n\n"
-    //     << "print"                               << "\n\n"
-    //     << "set path/to/key value"               << "     "
-    //     << "create path/creaton_key  value"      << "     "
-    //     << "remove path/to/key"                  << "     " << "\n\n"
-    //     << "save"                                << "     "
-    //     << "saveas path/to/file/file_name"       << "     " << "\n\n"
-    //     << "close"                               << "     "
-    //     << "exit"                                << '\n'
-    //     << "------------------------------"      << '\n';
-    // }
     void printInfo(std::ostream& outputStream) {
-        outputStream << "\n╔═════════════════ JSON PARSER COMMANDS ════════════════╗\n"
+        outputStream << "\n╔══════════════════ LIST  OF COMMANDS  ═════════════════╗\n"
                      <<   "║                                                       ║\n"
                      <<   "║ validate <path/to/file>  open <path/to/file>          ║\n"
                      <<   "║ print                    set <path/to/value> <value>  ║\n"
