@@ -34,9 +34,9 @@ void Startup::run() {
 void Startup::runDemo() {
     JSONManager manager;
     try {
-        std::cout << "Openeing ../files/organisation.json" << '\n';
-        manager.open("../files/organisation.json");
-        std::cout << "Printing ../files/organisation.json";
+        std::cout << "Opening ../JSONfiles/organisation.json" << '\n';
+        manager.open("../JSONfiles/organisation.json");
+        std::cout << "Printing ../JSONfiles/organisation.json";
         manager.print();
         std::cout << '\n';
         Vector<JSONValue* > searchResults = manager.search("name");
@@ -63,7 +63,7 @@ void Startup::runDemo() {
         std::cout << "After remove operation" << '\n';
         manager.print();
     
-        std::cout << '\n' << "Closing manager and ../files/organisation.json" << '\n';
+        std::cout << '\n' << "Closing manager and ../JSONfiles/organisation.json" << '\n';
         manager.close();
     
     } catch (const JSONException& e) {
