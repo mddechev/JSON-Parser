@@ -1,8 +1,4 @@
 #include "../includes/commands/CreateCommand.hpp"
-#include "../includes/json_types/JSONString.hpp"
-#include "../includes/json_types/JSONNumber.hpp"
-#include "../includes/json_types/JSONNull.hpp"
-#include "../includes/json_types/JSONBool.hpp"
 #include "../includes/JSONFactory.hpp"
 
 CreateCommand::CreateCommand(JSONManager* const managerPtr)
