@@ -7,7 +7,6 @@ bool PrintCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {
         return false;
     }
-    std::cout << "Printing data....\n";
     getManagerPtr()->print();
     return true;
 }
