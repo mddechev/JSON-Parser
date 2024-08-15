@@ -12,5 +12,7 @@ namespace helpers {
     void getLine(std::istream& inputStream, String& result, size_t length = 1024, const char delimiter = '\n');
 
     void printInfo(std::ostream& outputStream = std::cout);
+
+    bool isDigit(const char character);
 }
 #endif //_HELPERS_HPP_
