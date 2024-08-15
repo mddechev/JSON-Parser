@@ -16,8 +16,8 @@ void Startup::run() {
     
     try {
         while (true) {
-            std::cout << ">";
             String command;
+            std::cout << '\n' << ">";
             helpers::getLine(std::cin, command);
             
             if (!handler.handle(command)) {
@@ -54,16 +54,16 @@ void Startup::runDemo() {
         
         std::cout << "After set operation" << '\n';
         manager.print();
-
+        std::cout << '\n' << "Creating management/directorName \"Petar Tudjarov\"" << '\n';
         manager.create("management/directorName", new JSONString("Petar Tudjarov"));
-        std::cout << "After create operation managamenet/directorId \"Petar Tudjarov\"" << '\n';
+        std::cout << "After create operation" << '\n';
         manager.print();
-
+        std::cout << '\n' << "Removing management/directorName" << '\n';
         manager.remove("management/directorName");
-        std::cout << "Removing managemenet/directorName" << '\n';
+        std::cout << "After remove operation" << '\n';
         manager.print();
-
-        std::cout << "Closing manager and ../files/organisation.json" << '\n';
+    
+        std::cout << '\n' << "Closing manager and ../files/organisation.json" << '\n';
         manager.close();
     
     } catch (const JSONException& e) {
