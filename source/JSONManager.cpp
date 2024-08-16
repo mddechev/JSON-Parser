@@ -22,8 +22,6 @@ void JSONManager::open(const String& filePath) {
 
     std::ifstream file(filePath.C_str());
     if (!file.is_open()) {
-        // throw FileError("Unable to open file(check file path): ", fileName);
-        // throw std::runtime_error("Unable to open file. Check the file path'\n");
         throw FileError("Couldn't open. Check the file path for", filePath);
     } else if (!file) {
         throw FileError("File error in ", filePath);
