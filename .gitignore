@@ -14,5 +14,5 @@ main
 includes/commands/MoveCommand.hpp
 source/commands/MoveCommand.cpp.
 
-DS_Store
-.DS_Store?
+# local MacOS specific files
+**/.DS_Store
