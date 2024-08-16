@@ -4,7 +4,7 @@
 void JSONValue::search(const String &key, Vector<JSONValue*>& searchResultsArray) const {}
 
 void JSONValue::set(const Vector<String> &path, JSONValue *const value) {
-    InvalidPathError();
+    throw InvalidPathError();
 }
 
 void JSONValue::create(const Vector<String> &path, JSONValue *const value) {
@@ -18,10 +18,6 @@ void JSONValue::remove(const Vector<String> &path) {
 bool JSONValue::contains(const String &value) const {
     return false;
 }
-
-// void JSONValue::move(const Vector<String> &fromPath, const Vector<String> toPath) {
-//     throw InvalidPathError();
-// }
 
 void JSONValue::printIndent(std::ostream& outputStream, size_t indent) {
     for (size_t i = 0; i < indent; i++) {
