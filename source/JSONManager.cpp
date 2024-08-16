@@ -17,7 +17,7 @@ JSONManager::~JSONManager() {
 
 void JSONManager::open(const String& filePath) {
     if(isFileOpen) {
-        throw FileError("JSON file already opened: ", currentFilePath);
+        throw FileError("JSON file already opened", currentFilePath);
     }
 
     std::ifstream file(filePath.C_str());
