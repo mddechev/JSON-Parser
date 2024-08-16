@@ -23,7 +23,7 @@ void JSONManager::open(const String& filePath) {
     std::ifstream file(filePath.C_str());
     if (!file.is_open()) {
         throw FileError("Couldn't open. Check the file path for", filePath);
-        
+
     } else if (!file) {
         throw FileError("File error in ", filePath);
     }
@@ -92,7 +92,7 @@ void JSONManager::print(std::ostream& outputStream) const {
     if (root) {
         root->print(outputStream);
     } else {
-        outputStream << "No JSON data loaded to print";
+        outputStream << "No JSON data loaded to print" << '\n';
     }
     outputStream << '\n';
 }
@@ -101,7 +101,7 @@ bool JSONManager::validate(const String& filePath) const {
     try {
         std::ifstream file(filePath.C_str());
         if (!file.is_open()) {
-            throw FileError("Couldn't open: ", filePath);
+            throw FileError("Couldn't open", filePath);
         }
 
         JSONValidator::validate(file);
@@ -179,6 +179,7 @@ void JSONManager::remove(const String& path) {
 
 bool JSONManager::contains(const String &value) const {
     checkFileOpen();
+
     if (!root) {
         throw JSONException("No JSON data loaded to check for containing");
     }
@@ -219,7 +220,7 @@ void JSONManager::checkFileOpen() const {
 void JSONManager::saveToFile(const String& filePath) {
     std::ofstream destinationFile(filePath.C_str());
     if(!destinationFile) {
-        throw FileError("Couldn't open: ", filePath);
+        throw FileError("Couldn't open", filePath);
     }
     if (root) {
         root->print(destinationFile);
@@ -229,14 +230,10 @@ void JSONManager::saveToFile(const String& filePath) {
 
     destinationFile.close();
     if (destinationFile.fail()) {
-        throw FileError("Error occured while saving the file: ", filePath);
+        throw FileError("Error occured while saving the file", filePath);
     }
 }
 
 void JSONManager::parseJSON(std::istream& inputStream) {
-    try {
-        root = JSONFactory::getFactory().createValue(inputStream);
-    } catch (const std::exception& e) {
-        std::cerr << "Error in parseJSON: " << e.what() << std::endl;
-    }
+    root = JSONFactory::getFactory().createValue(inputStream);
 }
