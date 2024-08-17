@@ -13,7 +13,7 @@ public:
 
     void open(const String& filePath);
 
-    void save();
+    bool save();
 
     void saveAs(const String& filePath);
 
@@ -21,7 +21,7 @@ public:
 
     void print(std::ostream& outputStream = std::cout) const;
 
-    bool validate(const String& filePath) const;
+    void validate(const String& filePath) const;
 
     Vector<JSONValue*> search(const String& key) const;
 
