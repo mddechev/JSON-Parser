@@ -10,21 +10,23 @@ bool SearchCommand::execute(const Vector<String>& tokenizedCommand) {
         std::cerr << "Invalid search command. (search <key>)" << '\n';
         return false;
     }
-    try {
-        Vector<JSONValue*> searchResults = getManagerPtr()->search(tokenizedCommand[1]);
-        std::cout << "Search results for " << tokenizedCommand[1] << '\n';
-        std::cout << ARRAY_OPENING_BRACKET << '\n';
-        for (size_t i = 0; i < searchResults.Size(); i++) {
-            std::cout << "  ";
-            searchResults[i]->print();
-            std::cout << '\n';
-        }
-        std::cout << ARRAY_CLOSING_BRACKET << '\n';
+
+    Vector<JSONValue*> searchResults = getManagerPtr()->search(tokenizedCommand[1]);
+
+    if (searchResults.IsEmpty()) {
+        std::cout  << "No values found for key: " << tokenizedCommand[1] << '\n';
         return true;
-    } catch(const std::runtime_error& e) {
-        std::cerr << e.what() << '\n';
-        return false;
-    }   
+    }
+
+    std::cout << "Search results for " << tokenizedCommand[1] << '\n';
+    std::cout << ARRAY_OPENING_BRACKET << '\n';
+    for (size_t i = 0; i < searchResults.Size(); i++) {
+        std::cout << "  ";
+        searchResults[i]->print();
+        std::cout << '\n';
+    }
+    std::cout << ARRAY_CLOSING_BRACKET << '\n';
+    return true;
 }
 
 bool SearchCommand::validate(const Vector<String>& tokenizedCommand) {
