@@ -41,26 +41,22 @@ CommandHandler::~CommandHandler() {
     }
 }
 
-bool CommandHandler::handle(const String &cmd) {
-    Vector<String> tokenized = helpers::tokenizeLineToStrings(cmd, ' ');
-    if (tokenized.IsEmpty()) {
+bool CommandHandler::handle(const String &command) {
+    Vector<String> tokenizedCommand = helpers::tokenizeLineToStrings(command, ' ');
+
+    if (tokenizedCommand.IsEmpty()) {
         return true;
     }
     
     try {
-        Command* fetchedCmd = getCommandByName(tokenized[0]);
-        if (fetchedCmd == nullptr) {
-            // std::cerr << "Error: Command not found" << '\n';
+        Command* fetchedCommand = getCommandByName(tokenizedCommand[0]);
+
+        if (fetchedCommand == nullptr) {
             std::cerr << "Command not found. Please enter valid command" << '\n';
             return true;
         }
-        // bool result = fetchedCmd->execute(tokenized);
-        // // if (!result) {
-        // //     // std::cerr << "Error: Command execution failed" << '\n';
-        // //     std::cerr << "Command execution failed. "<< '\n' <<  "Please enter valid command" << '\n';
-        // // }
-        // return result;
-        return fetchedCmd->execute(tokenized);
+
+        return fetchedCommand->execute(tokenizedCommand);
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
         return true;
