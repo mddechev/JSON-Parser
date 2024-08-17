@@ -22,10 +22,10 @@ void JSONManager::open(const String& filePath) {
 
     std::ifstream file(filePath.C_str());
     if (!file.is_open()) {
-        throw FileError("Couldn't open. Check the file path for", filePath);
+        throw FileError("Couldn't open. Check the file path", filePath);
 
     } else if (!file) {
-        throw FileError("File error in ", filePath);
+        throw FileError("File error", filePath);
     }
 
     try {
