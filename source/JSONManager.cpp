@@ -28,52 +28,43 @@ void JSONManager::open(const String& filePath) {
         throw FileError("File error", filePath);
     }
 
-    try {
-        JSONValidator::validate(file);
+    JSONValidator::validate(file);
 
+    file.clear();
+    file.seekg(0);
+
+    char ch;
+    bool isEmpty = true;
+    while (file.get(ch)) {
+        if (!std::isspace(ch)) {
+            isEmpty = false;
+            break;
+        }
+    }
+
+    if (isEmpty) {
+        root = nullptr;
+        std::cout << "Empty file detected." << '\n';
+
+    } else {
         file.clear();
         file.seekg(0);
-
-        char ch;
-        bool isEmpty = true;
-        while (file.get(ch)) {
-            if (!std::isspace(ch)) {
-                isEmpty = false;
-                break;
-            }
-        }
-
-        if (isEmpty) {
-            root = nullptr;
-            std::cout << "Empty file detected." << '\n';
-
-        } else {
-            file.clear();
-            file.seekg(0);
-            parseJSON(file);
-        }
-
-        currentFilePath = filePath;
-        isFileOpen = true;
-        isModified = false;
-
-    } catch (const InvalidJSONSyntax& e) {
-        std::cerr << "Invalid JSON Syntax: ";
-        throw std::runtime_error(e.what());
-    } catch (const CreationError& e) {
-        throw std::runtime_error(e.what());
-    } catch (const std::exception& e) {
-        throw std::runtime_error(e.what());
+        parseJSON(file);
     }
+
+    currentFilePath = filePath;
+    isFileOpen = true;
+    isModified = false;
 } 
 
-void JSONManager::save() {
+bool JSONManager::save() {
     checkFileOpen();
     if (!isModified) {
-        throw FileError("No changes made to", currentFilePath);
+        return false;
     }
     saveToFile(currentFilePath);
     isModified = false;
+    return true;
 }
 
 void JSONManager::saveAs(const String &filePath) {
@@ -97,22 +88,13 @@ void JSONManager::print(std::ostream& outputStream) const {
     outputStream << '\n';
 }
 
-bool JSONManager::validate(const String& filePath) const {
-    try {
-        std::ifstream file(filePath.C_str());
-        if (!file.is_open()) {
-            throw FileError("Couldn't open", filePath);
-        }
-
-        JSONValidator::validate(file);
-        return true;
-    } catch (const InvalidJSONSyntax& e) {
-        std::cerr << "Validation error: " << e.what() << '\n';
-        return false;
-    } catch (const FileError& e) {
-        std::cerr << e.what() << '\n';
-        return false;
+void JSONManager::validate(const String& filePath) const {
+    std::ifstream file(filePath.C_str());
+    if (!file.is_open()) {
+        throw FileError("Couldn't open", filePath);
     }
+
+    JSONValidator::validate(file);
 }
 
 Vector<JSONValue*> JSONManager::search(const String& key) const {
@@ -154,7 +136,7 @@ void JSONManager::create(const String& path, JSONValue* const value) {
     try {
         root->create(tokenizedPath, value);
         isModified = true;
-    } catch (const std::exception& e) {
+    } catch (const JSONException& e) {
         delete value;
         throw;
     }
@@ -169,9 +151,9 @@ void JSONManager::remove(const String& path) {
         throw JSONException("No JSON data loaded to remove");
     }
     
-    if (tokenizedPath.IsEmpty()) {
-        throw InvalidPathError("Empty path for remove operation");
-    }
+    // if (tokenizedPath.IsEmpty()) {
+    //     throw InvalidPathError("Empty path for remove operation");
+    // }
     root->remove(tokenizedPath);
     isModified = true;
 }
@@ -213,7 +195,7 @@ bool JSONManager::contains(const String &value) const {
 
 void JSONManager::checkFileOpen() const {
     if(!isFileOpen) {
-        throw std::runtime_error("No JSON document currently loaded");
+            throw std::runtime_error("No JSON document currently loaded");
     }   
 }
 
@@ -222,11 +204,10 @@ void JSONManager::saveToFile(const String& filePath) {
     if(!destinationFile) {
         throw FileError("Couldn't open", filePath);
     }
-    if (root) {
-        root->print(destinationFile);
-    } else {
-        destinationFile << "{}";
+    if(!root) {
+        return;
     }
+    root->print(destinationFile);
 
     destinationFile.close();
     if (destinationFile.fail()) {
