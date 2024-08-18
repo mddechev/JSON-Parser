@@ -34,11 +34,12 @@ void Startup::run() {
 void Startup::runDemo() {
     JSONManager manager;
     try {
-        std::cout << "Opening ../JSONfiles/organisation.json" << '\n';
+        std::cout << "Opening ../JSONfiles/organisation.json" << "\n\n";
         manager.open("../JSONfiles/organisation.json");
-        std::cout << "Printing ../JSONfiles/organisation.json";
+        std::cout << "Printing ../JSONfiles/organisation.json" << '\n';
         manager.print();
         std::cout << '\n';
+        
         Vector<JSONValue* > searchResults = manager.search("name");
         std::cout << "Search results for name" << '\n';
         std::cout << ARRAY_OPENING_BRACKET << '\n';
