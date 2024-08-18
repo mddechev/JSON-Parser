@@ -14,10 +14,11 @@ public:
 
     bool handle(const String& commandName);
 
-public:
-    Vector<Command*> supportedCommands;
-
+private:
     Command* getCommandByName(const String& commandName) const;
+
+private:
+    Vector<Command*> supportedCommands;
 };
 
 #endif //_COMMAND_HANDLER_HPP_
