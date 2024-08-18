@@ -51,12 +51,13 @@ bool CommandHandler::handle(const String &command) {
     try {
         Command* fetchedCommand = getCommandByName(tokenizedCommand[0]);
 
-        if (fetchedCommand == nullptr) {
+        if (!fetchedCommand) {
             std::cerr << "Command not found. Please enter valid command" << '\n';
             return true;
         }
 
         return fetchedCommand->execute(tokenizedCommand);
+        
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
         return true;
