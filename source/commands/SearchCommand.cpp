@@ -19,6 +19,13 @@ bool SearchCommand::execute(const Vector<String>& tokenizedCommand) {
     }
 
     std::cout << "Search results for " << tokenizedCommand[1] << '\n';
+    
+    if (searchResults.Size() == 1) {
+        searchResults[0]->print();
+        std::cout << '\n';
+        return true;
+    }
+
     std::cout << ARRAY_OPENING_BRACKET << '\n';
     for (size_t i = 0; i < searchResults.Size(); i++) {
         std::cout << "  ";
