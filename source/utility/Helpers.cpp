@@ -34,7 +34,6 @@ namespace helpers {
 
     void printInfo(std::ostream& outputStream) {
         outputStream << "\n╔══════════════════ LIST  OF COMMANDS  ═════════════════╗\n"
-                     <<   "║                                                       ║\n"
                      <<   "║ validate <path/to/file>  open <path/to/file>          ║\n"
                      <<   "║ print                    set <path/to/value> <value>  ║\n"
                      <<   "║ create <path> <value>    delete <path/to/value>       ║\n"
