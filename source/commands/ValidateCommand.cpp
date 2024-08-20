@@ -17,7 +17,8 @@ bool ValidateCommand::execute(const Vector<String>& tokenizedCommand) {
     }
    try {
         getManagerPtr()->validate(tokenizedCommand[1]);
-        std::cout << "Successfull validation of " << getManagerPtr()->getCurrentFilePath() << '\n'; 
+        std::cout << "Successfull validation of " << tokenizedCommand[1] << '\n';
+        return true;
    } catch (const InvalidJSONSyntax& e) {
         std::cerr << "Validation error - " << e.what() << '\n';
         return true;
