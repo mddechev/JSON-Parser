@@ -12,12 +12,12 @@ public:
     String();
     String(size_t capacity);
     String(const char* data);
+    String(const String& other);
+    String(String&& other) noexcept;
     ~String();
 
-    String(const String& other);
     String& operator=(const String& other);
-    String(String&& other);
-    String& operator=(String&& other);
+    String& operator=(String&& other) noexcept;
 
     String& operator+=(const String& other);
     String& operator+=(char const *other);
@@ -68,7 +68,7 @@ private:
     void AllocateByCapacity(size_t capacity);
     void AllocateAndCopy(const char* dataToCopy);
     void Copy(const String& other);
-    void Move(String&& other);
+    void Move(String&& other) noexcept;
     void Free();
 
 private:

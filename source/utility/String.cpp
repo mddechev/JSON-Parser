@@ -36,13 +36,17 @@ String::String(const char* src)
    }
 }
 
-String::~String() {
-    Free();
-}
-
 String::String(const String& other) 
     :data(nullptr) {
     Copy(other);
+}
+
+String::String(String&& other) noexcept {
+    Move(std::move(other));
+}
+
+String::~String() {
+    Free();
 }
 
 String& String::operator=(const String& other) {
@@ -53,12 +57,7 @@ String& String::operator=(const String& other) {
     return *this;
 }
 
-String::String(String&& other)
-    :data(nullptr) {
-    Move(std::move(other));
-}
-
-String& String::operator=(String&& other) {
+String& String::operator=(String&& other) noexcept {
     if (this != &other) {
         Free();
         Move(std::move(other));
@@ -295,7 +294,7 @@ void String::Copy(const String& other) {
     this->size = other.size;
 }
 
-void String::Move(String&& other) {
+void String::Move(String&& other) noexcept {
     this->data = other.data;
     this->capacity = other.capacity;
     this->size = other.size;
