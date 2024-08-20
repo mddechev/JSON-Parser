@@ -9,10 +9,12 @@ class JSONKeyPair {
 public:
     JSONKeyPair(const String& key, JSONValue* value);
     JSONKeyPair(const JSONKeyPair& other);
+    JSONKeyPair(JSONKeyPair&& other) noexcept;
     ~JSONKeyPair();
 
     JSONKeyPair& operator=(const JSONKeyPair& other);
-
+    JSONKeyPair& operator=(JSONKeyPair&& other) noexcept;
+    
     void print(std::ostream& outputStream = std::cout, size_t indent = 0) const;
 
     void search(const String& key, Vector<JSONValue*>& searchResultsArray) const;
@@ -27,7 +29,7 @@ public:
 
 public:
     void setValue(JSONValue* value);
-    void setKey(const String& key);
+    // void setKey(const String& key);
 
     const String& getKey() const { return key; }
     String& getKey() { return key;}
@@ -36,10 +38,11 @@ public:
     JSONValue* getValue() { return value; }
 
 private:
-    static void printIndent(std::ostream& os, size_t indent);
+    static void printIndent(std::ostream& outputStream, size_t indent);
     
 private:
     void copy(const JSONKeyPair& other);
+    void move(JSONKeyPair&& other) noexcept; 
     void free();
 
 private:

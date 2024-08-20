@@ -1,19 +1,34 @@
 #include "../../includes/json_types/JSONArray.hpp"
 #include "../../includes/utility/Constants.hpp"
 #include "../../includes/json_types/JSONObject.hpp"
-
-JSONArray::~JSONArray() noexcept {
-    free();
-}
+#include "JSONException.hpp"
+#include "utility/Vector.hpp"
+#include <cstddef>
 
 JSONArray::JSONArray(const JSONArray& other) {
     copy(other);
 }
 
-JSONArray& JSONArray::operator=(const JSONArray &other) {
+JSONArray::JSONArray(JSONArray&& other) noexcept {
+    move(std::move(other));
+}
+
+JSONArray::~JSONArray() noexcept {
+    free();
+}
+
+JSONArray& JSONArray::operator=(const JSONArray& other) {
     if (this != &other) {
         free();
         copy(other);
+    }
+    return *this;
+}
+
+JSONArray& JSONArray::operator=(JSONArray&& other) noexcept {
+    if (this != &other) {
+        free();
+        move(std::move(other));
     }
     return *this;
 }
@@ -37,7 +52,9 @@ JSONValue* JSONArray::clone() const {
 void JSONArray::print(std::ostream &outputStream, size_t indent) const {
     outputStream << ARRAY_OPENING_BRACKET << '\n';
         for (size_t i = 0; i < values.Size(); ++i) {
-            if (i > 0) outputStream << ',' << '\n';
+            if (i > 0) {
+                outputStream << ',' << '\n';
+            }
             printIndent(outputStream, indent + 1);
             values[i]->print(outputStream, indent + 1);
         }
@@ -100,6 +117,7 @@ void JSONArray::create(const Vector<String>& path, JSONValue* const value) {
             throw InvalidPathError("Array index out of bounds for nested creation");
         }
         
+    
         Vector<String> subPath;
         for (size_t i = 1; i < path.Size(); ++i) {
             subPath.PushBack(path[i]);
@@ -145,35 +163,6 @@ bool JSONArray::contains(const String &value) const {
     return false;
 }
 
-void JSONArray::addValue(JSONValue* const value) {
-    values.PushBack(value);
-}
-
-void JSONArray::removeValue(size_t index) {
-    values.EraseAt(index);
-}
-
-void JSONArray::setValue(size_t index, JSONValue* const value) {
-    if (index >= this->values.Size()) {
-        throw std::out_of_range("index out of range");
-    }
-    this->values[index] = value->clone();
-}
-
-const JSONValue* const JSONArray::getValue(size_t index) const {
-    if (index >= values.Size()) {
-        throw std::out_of_range("Index out of range");
-    }
-    return values[index];
-}
-
-JSONValue* JSONArray::getValue(size_t index) {
-    if (index >= values.Size()) {
-        throw std::out_of_range("Index out of range");
-    }
-    return values[index];
-}
-
 void JSONArray::free() {
     for (size_t i = 0; i < values.Size(); i++) {
         delete values[i];
@@ -181,9 +170,13 @@ void JSONArray::free() {
 }
 
 void JSONArray::copy(const JSONArray& other) {
-    this->values.Reserve(other.getValues().Size());
+    this->values.Reserve(other.values.Size());
 
-    for (size_t i = 0; i < other.getValues().Size(); i++) {
-        this->values.PushBack(other.getValues()[i]->clone());
+    for (size_t i = 0; i < other.values.Size(); i++) {
+        this->values.PushBack(other.values[i]->clone());
     }
+}
+
+void JSONArray::move(JSONArray&& other) noexcept {
+    values = std::move(other.values);
 }

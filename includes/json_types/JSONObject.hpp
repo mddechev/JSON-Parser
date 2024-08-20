@@ -9,9 +9,11 @@ class JSONObject: public JSONValue {
 public:
     JSONObject() = default;
     JSONObject(const JSONObject& other);
+    JSONObject(JSONObject&& other) noexcept;
     ~JSONObject() noexcept override;
 
     JSONObject& operator=(const JSONObject& other);
+    JSONObject& operator=(JSONObject&& other) noexcept;
 
     String toString() const override;
 
@@ -30,21 +32,14 @@ public:
     bool contains(const String &value) const override;
 
 public:
-    const JSONKeyPair* getPair(const String& key) const;
-    JSONKeyPair* getPair(const String& key);
-
-    const JSONValue* getValue(const String& key) const;
-    JSONValue* getValue(const String& key);
-
-    const Vector<JSONKeyPair*>& getValues() const { return values; }
-    Vector<JSONKeyPair*>& getValues() { return values; }
-
     void addPair(const String& key, JSONValue* value);    
     void removePair(const String& key);
 
 private:
+    JSONKeyPair* getPair(const String& key);
     size_t getValueIndex(const String& key) const;
     void copy(const JSONObject& other);
+    void move(JSONObject&& other) noexcept;
     void free();
 
 private:

@@ -9,9 +9,11 @@ class JSONArray: public JSONValue {
 public:
     JSONArray() = default;
     JSONArray(const JSONArray& other);
+    JSONArray(JSONArray&& other) noexcept;
     ~JSONArray() noexcept override;
 
     JSONArray& operator=(const JSONArray& other);
+    JSONArray& operator=(JSONArray&& other) noexcept;
 
     String toString() const override;
 
@@ -31,18 +33,10 @@ public:
 
 public:
     Vector<JSONValue*>& getValues() { return values; }
-    const Vector<JSONValue*>& getValues() const { return values; }
-
-    void addValue(JSONValue* const value);
-    void removeValue(size_t index);
-
-    void setValue(size_t index, JSONValue* const value);
-
-    const JSONValue* const getValue(size_t index) const;
-    JSONValue* getValue(size_t index);
-
+    
 private:
     void copy(const JSONArray& other);
+    void move(JSONArray&& other) noexcept;
     void free();
     
 private:

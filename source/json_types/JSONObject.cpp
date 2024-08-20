@@ -1,18 +1,34 @@
 #include "../../includes/json_types/JSONObject.hpp"
 #include "../../includes/utility/Constants.hpp"
+#include "JSONException.hpp"
+#include "json_types/JSONKeyPair.hpp"
+#include "utility/Vector.hpp"
+#include <cstddef>
 
 JSONObject::JSONObject(const JSONObject& other) {
     copy(other);
+}
+
+JSONObject::JSONObject(JSONObject&& other) noexcept {
+    move(std::move(other));
 }
 
 JSONObject::~JSONObject() noexcept {
     free();
 }
 
-JSONObject& JSONObject::operator=(const JSONObject &other) {
+JSONObject& JSONObject::operator=(const JSONObject& other) {
     if (this != &other) {
         free();
         copy(other);
+    }
+    return *this;
+}
+
+JSONObject& JSONObject::operator=(JSONObject&& other) noexcept {
+    if (this != &other) {
+        free();
+        move(std::move(other));
     }
     return *this;
 }
@@ -39,7 +55,9 @@ JSONValue* JSONObject::clone() const {
 void JSONObject::print(std::ostream &outpuStream, size_t indent) const {
     outpuStream << OBJECT_OPENING_BRACKET << '\n';
         for (size_t i = 0; i < values.Size(); ++i) {
-            if (i > 0) outpuStream << ',' << '\n';
+            if (i > 0) {
+                outpuStream << ',' << '\n';
+            }
             values[i]->print(outpuStream, indent + 1);
         }
         outpuStream << '\n';
@@ -84,21 +102,21 @@ void JSONObject::create(const Vector<String>& path, JSONValue* const value) {
     if (path.IsEmpty()) {
         throw InvalidPathError("Empty path for create operation in object");
     }
-
+    String key = path[0];
     JSONKeyPair* pair = nullptr;
     try {
-        pair = getPair(path[0]);
+        pair = getPair(key);
     } catch (const KeyNotFound&) {
         // Key not found, which is expected for creation
         if (path.Size() == 1) {
             // If it's the last part of the path, add the new value
-            addPair(path[0], value);
+            addPair(key, value);
             return;
         } else {
             // Create an intermediate object
             JSONObject* newObject = new JSONObject;
-            addPair(path[0], newObject);
-            pair = getPair(path[0]);
+            addPair(key, newObject);
+            pair = getPair(key);
 
         }
     }
@@ -107,10 +125,11 @@ void JSONObject::create(const Vector<String>& path, JSONValue* const value) {
         if (pair) {
             throw JSONException("Element already exists");
         }
-        addPair(path[0], value);
+        addPair(key, value);
+        return;
     } else {
         if (!pair) {
-            throw KeyNotFound("Key not found in object", path[0]);
+            throw KeyNotFound("Key not found in object", key);
         }
         
         Vector<String> subPath;
@@ -148,21 +167,8 @@ bool JSONObject::contains(const String &value) const {
     return false;
 }
 
-const JSONKeyPair* JSONObject::getPair(const String& key) const {
-    return values[getValueIndex(key)];
-}
-
-
 JSONKeyPair* JSONObject::getPair(const String& key) {
     return values[getValueIndex(key)];
-}
-
-const JSONValue* JSONObject::getValue(const String &key) const {
-    return values[getValueIndex(key)]->getValue();
-}
-
-JSONValue* JSONObject::getValue(const String &key) {
-    return values[getValueIndex(key)]->getValue();
 }
 
 void JSONObject::addPair(const String& key, JSONValue *value) {
@@ -183,16 +189,19 @@ size_t JSONObject::getValueIndex(const String& key) const {
 }
 
 void JSONObject::copy(const JSONObject& other) {
-    this->values.Reserve(other.getValues().Size());
+    this->values.Reserve(other.values.Size());
 
-    for (size_t i = 0; i < other.getValues().Size(); i++) {
-        this->values.PushBack(other.getValues()[i]);
+    for (size_t i = 0; i < other.values.Size(); i++) {
+        this->values.PushBack(other.values[i]);
     }
+}
+
+void JSONObject::move(JSONObject&& other) noexcept {
+    values = std::move(other.values);
 }
 
 void JSONObject::free() {
     for (size_t i = 0; i < values.Size(); i++) {
         delete values[i];
     }
-    values.Clear();
 }

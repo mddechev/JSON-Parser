@@ -9,13 +9,18 @@
 class JSONManager {
 public:
     JSONManager();
+    JSONManager(const JSONManager& other);
+    JSONManager(JSONManager&& other) noexcept;
     ~JSONManager();
+
+    JSONManager& operator=(const JSONManager& other);
+    JSONManager& operator=(JSONManager&& other) noexcept;
 
     void open(const String& filePath);
 
     bool save();
 
-    void saveAs(const String& filePath);
+    void saveAs(const String& filePath) const;
 
     void close();
 
@@ -40,8 +45,11 @@ public:
     const String& getCurrentFilePath() const { return currentFilePath; }
 
 private:
+    void copy(const JSONManager& other);
+    void move(JSONManager&& other) noexcept;
+    void free();
     void checkFileOpen() const;
-    void saveToFile(const String& fileName);
+    void saveToFile(const String& fileName) const;
     void parseJSON(std::istream& is); 
 
 private:

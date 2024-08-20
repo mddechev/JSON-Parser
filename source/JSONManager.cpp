@@ -3,7 +3,6 @@
 #include "../includes/JSONFactory.hpp"
 #include "../includes/JSONValidator.hpp"
 #include <fstream>
-#include <stdexcept>
 #include "../includes/utility/Helpers.hpp"
 #include "../includes/json_types/JSONObject.hpp"
 #include "utility/Vector.hpp"
@@ -11,9 +10,35 @@
 JSONManager::JSONManager()
     :root(nullptr), isFileOpen(false), isModified(false) {}
 
-JSONManager::~JSONManager() {
-    delete root;
+JSONManager::JSONManager(const JSONManager& other) {
+    copy(other);
 }
+
+JSONManager::JSONManager(JSONManager&& other) noexcept {
+    move(std::move(other));
+}
+
+JSONManager::~JSONManager() {
+    // delete root;
+    free();
+}
+
+JSONManager& JSONManager::operator=(const JSONManager& other) {
+    if (this != &other) {
+        free();
+        copy(other);
+    }
+    return *this;
+}
+
+JSONManager& JSONManager::operator=(JSONManager&& other) noexcept {
+    if (this != &other) {
+        free();
+        move(std::move(other));
+    }
+    return *this;
+}
+
 
 void JSONManager::open(const String& filePath) {
     if(isFileOpen) {
@@ -67,16 +92,17 @@ bool JSONManager::save() {
     return true;
 }
 
-void JSONManager::saveAs(const String &filePath) {
+void JSONManager::saveAs(const String &filePath) const {
     checkFileOpen();
     saveToFile(filePath);
 }
 
 void JSONManager::close() {
     checkFileOpen();
-    delete root;
-    root = nullptr;
-    isFileOpen = false;
+    // delete root;
+    // root = nullptr;
+    // isFileOpen = false;
+    free();
 }
 
 void JSONManager::print(std::ostream& outputStream) const {
@@ -168,30 +194,6 @@ bool JSONManager::contains(const String &value) const {
     return root->contains(value);
 }
 
-// // claude ai second try
-// void JSONManager::move(const String& fromPath, const String& toPath) {
-//     Vector<String> tokenizedFromPath = helpers::tokenizeLineToStrings(fromPath, '/');
-//     Vector<String> tokenizedToPath = helpers::tokenizeLineToStrings(toPath, '/');
-//     checkFileOpen();
-//     if (!root) {
-//         throw JSONException("No JSON document is currently open");
-//     } 
-
-//     if (tokenizedFromPath.IsEmpty() || tokenizedToPath.IsEmpty()) {
-//         throw InvalidPathError("Invalid path for move operation");
-//     }
-//     try {
-//         root->move(tokenizedFromPath, tokenizedToPath);
-//         isModified = true;  // Set this to true to ensure changes are saved
-//         std::cout << "Successfully moved from ";
-//         tokenizedFromPath.Print(std::cout, '/');
-//         std::cout << " to ";
-//         tokenizedToPath.Print(std::cout, '/');
-//         std::cout << '\n';
-//     } catch (const JSONException& e) {
-//         std::cerr << "Error during move operation: " << e.what() << '\n';
-//     }
-// }
 
 void JSONManager::checkFileOpen() const {
     if(!isFileOpen) {
@@ -199,7 +201,7 @@ void JSONManager::checkFileOpen() const {
     }   
 }
 
-void JSONManager::saveToFile(const String& filePath) {
+void JSONManager::saveToFile(const String& filePath) const{
     std::ofstream destinationFile(filePath.C_str());
     if(!destinationFile) {
         throw FileError("Couldn't open", filePath);
@@ -217,4 +219,32 @@ void JSONManager::saveToFile(const String& filePath) {
 
 void JSONManager::parseJSON(std::istream& inputStream) {
     root = JSONFactory::getFactory().createValue(inputStream);
+}
+
+void JSONManager::copy(const JSONManager& other) {
+    if (!other.root) {
+        this->root = nullptr;
+    }
+    this->root = other.root->clone();
+    this->currentFilePath = other.currentFilePath;
+    this->isFileOpen = other.isFileOpen;
+    this->isModified = other.isModified;
+}
+
+void JSONManager::move(JSONManager&& other) noexcept {
+    this->root = other.root;
+    this->currentFilePath = std::move(other.currentFilePath);
+    this->isFileOpen = other.isFileOpen;
+    this->isModified = other.isModified;
+
+    other.root = nullptr;
+    other.isFileOpen = false;
+    other.isModified = false;
+}
+
+void JSONManager::free() {
+    delete root;
+    root = nullptr;
+    isFileOpen = false;
+    isModified = false;
 }
