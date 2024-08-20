@@ -1,7 +1,27 @@
 #include "../includes/JSONParser.hpp"
 #include "../includes/JSONFactory.hpp"
 #include "../includes/utility/Constants.hpp"
+#include "json_types/JSONNull.hpp"
 
+
+JSONNull JSONParser::parseNull(std::istream &inputStream) {
+    String nullStr;
+    char character;
+    for (int i = 0; i < 4; ++i) {
+        if (inputStream.get(character)) {
+            nullStr += character;
+        } else {
+            break;
+        }
+    }
+    
+    if (nullStr == "null") {
+        return JSONNull();
+    } else {
+        throw InvalidJSONSyntax("Failed to create null value");
+    }
+    return JSONNull();
+}
 
 double JSONParser::parseNumber(std::istream &inputStream) {
         double result;

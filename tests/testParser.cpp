@@ -9,6 +9,18 @@
 #include "utility/String.hpp"
 #include <cassert>
 
+void testNullParsing(const String& JSONtext) {
+    InputStringStream isstream(JSONtext);
+    try {
+        JSONNull value(JSONParser::parseNull(isstream));
+        value.print();
+        std::cout << '\n';
+        std::cout << "Successfull JSON null parsing" << "\n\n";
+    } catch (const JSONException& e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+
 void testNumberParsing(const String& JSONtext) {
     InputStringStream isstream(JSONtext);
     try {
@@ -80,6 +92,7 @@ void testObjectParsing(const String& JSONtext) {
 }
 
 int main() {
+    testNullParsing("null");
     testNumberParsing("23");
     testBoolParsing("true");
     testStringParsing("\"this is string\"");

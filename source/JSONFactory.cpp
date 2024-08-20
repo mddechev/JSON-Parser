@@ -54,23 +54,7 @@ JSONValue* JSONFactory::createBool(std::istream &inputStream) {
 }
 
 JSONValue* JSONFactory::createNull(std::istream &inputStream) {
-    //this method was written fully by Claude AI 
-    // String nullStr;
-    // char character;
-    // for (int i = 0; i < 4; ++i) {
-    //     if (inputStream.get(character)) {
-    //         nullStr += character;
-    //     } else {
-    //         break;
-    //     }
-    // }
-    
-    // if (nullStr == "null") {
-    //     return new JSONNull;
-    // } else {
-    //     throw CreationError("Failed to create null value");
-    // }
-    return new JSONNull();
+    return new JSONNull(JSONParser::parseNull(inputStream));
 }
 
 JSONValue* JSONFactory::createString(std::istream &inputStream) {
