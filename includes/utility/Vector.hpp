@@ -20,9 +20,7 @@ public:
     Vector(Vector<T>&& other) noexcept;
     ~Vector();
 
-    // Vector(const Vector<T>& other);
     Vector& operator=(const Vector& other);
-    // Vector(Vector<T>&& other);
     Vector& operator=(Vector<T>&& other) noexcept;
 
     T& operator[](size_t position);
