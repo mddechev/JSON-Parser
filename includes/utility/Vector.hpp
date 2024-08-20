@@ -16,12 +16,14 @@ public:
     Vector();
     Vector(size_t capacity);
     Vector(size_t capacity, const T& defaultValue);
+    Vector(const Vector<T>& other);
+    Vector(Vector<T>&& other) noexcept;
     ~Vector();
 
-    Vector(const Vector<T>& other);
+    // Vector(const Vector<T>& other);
     Vector& operator=(const Vector& other);
-    Vector(Vector<T>&& other);
-    Vector& operator=(Vector<T>&& other);
+    // Vector(Vector<T>&& other);
+    Vector& operator=(Vector<T>&& other) noexcept;
 
     T& operator[](size_t position);
     const T& operator[](size_t position) const;
@@ -54,7 +56,7 @@ public:
 private:
     void Resize(size_t step = INCREMENT_STEP);
     void Copy(const Vector<T>& other);
-    void Move(Vector<T>&& other);
+    void Move(Vector<T>&& other) noexcept;
     void Free();
 
 private:
@@ -105,14 +107,19 @@ Vector<T>::Vector(size_t size, const T& defaultVal)
     }
 }
  
-template <typename T>
-Vector<T>::~Vector<T>() {
-    Free();
-}
-
 template<typename T>
 Vector<T>::Vector(const Vector<T>& other) {
     Copy(other);
+}
+
+template<typename T>
+Vector<T>::Vector(Vector<T>&& other) noexcept {
+    Move(std::move(other));
+}
+
+template <typename T>
+Vector<T>::~Vector<T>() {
+    Free();
 }
 
 template<typename T>
@@ -125,12 +132,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
 }
 
 template<typename T>
-Vector<T>::Vector(Vector<T>&& other) {
-    Move(std::move(other));
-}
-
-template<typename T>
-Vector<T>& Vector<T>::operator=(Vector<T>&& other) {
+Vector<T>& Vector<T>::operator=(Vector<T>&& other) noexcept {
     if (this != &other) {
         Free();
         Move(std::move(other));
@@ -302,7 +304,7 @@ void Vector<T>::Copy(const Vector<T>& other) {
 }
 
 template<typename T>
-void Vector<T>::Move(Vector<T>&& other) {
+void Vector<T>::Move(Vector<T>&& other) noexcept {
     this->data = other.data;
     this->capacity = other.capacity;
     this->size = other.size;
