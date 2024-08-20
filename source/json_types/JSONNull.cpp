@@ -7,7 +7,7 @@ void JSONNull::print(std::ostream &outputStream, size_t indent) const {
 }
 
 String JSONNull::toString() const {
-    return String(value);
+    return value;
 }
 
 JSONValue* JSONNull::clone() const {
