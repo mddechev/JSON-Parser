@@ -49,14 +49,10 @@ void testPrint(const String& filePath) {
 void testValidate(const String& filePath) {
     JSONManager manager;
     try {
-        if (!manager.validate(filePath)) {
-            std::cerr << "Invalid json" << '\n';
-            return;
-        }
-        std::cout << "Validation successfull of json data from " << filePath << '\n';
-        
+        manager.validate(filePath);
+        std::cout << "Validation successfull of " << filePath << '\n'; 
     } catch (const JSONException& e) {
-        std::cerr << e.what() << '\n';
+        std::cerr <<"Invalid JSON:" << e.what() << '\n';
     }
 }
 
