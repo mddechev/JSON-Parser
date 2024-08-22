@@ -1,6 +1,8 @@
 #include "JSONException.hpp"
 #include "JSONFactory.hpp"
+#include "json_types/JSONValue.hpp"
 #include "utility/String.hpp"
+#include <fstream>
 
 void testNumberCreation(const String& JSONtext) {
     InputStringStream iss(JSONtext);
@@ -104,6 +106,24 @@ void testValueCreation(const String& JSONtext) {
         delete value;
     } catch (const CreationError& e) {
         std::cerr << e.what() << '\n';
+    }
+}
+
+void testValueCreationFromFile(const String& filePath) {
+    std::ifstream file(filePath.C_str());
+    if (!file.is_open()) {
+        std::cerr << "Couldn't open " << filePath << '\n';
+        return;
+    }
+    JSONValue* value = nullptr;
+    try {
+        value = JSONFactory::getFactory().createValue(file);
+        value->print();
+        std::cout << '\n';
+        std::cout << "Successful value creation" << "\n\n";
+        delete value;
+    } catch (const CreationError& e) {
+        std::cerr << "Failed to create value:" << e.what() << '\n';
     }
 }
 
