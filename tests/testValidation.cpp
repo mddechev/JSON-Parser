@@ -1,6 +1,7 @@
 #include "../includes/JSONValidator.hpp"
 #include "JSONException.hpp"
 #include "utility/String.hpp"
+#include <fstream>
 
 void testNumber(const String& JSONtext) {
     InputStringStream iss(JSONtext);
@@ -87,15 +88,30 @@ void testNestedArray(const String& JSONtext) {
     }
 }
 
-void testNestedObject(const String& JSONtext) {
+void testValidation(const String& JSONtext) {
     InputStringStream iss(JSONtext);
     try {
         std::cout << JSONtext << '\n';
         JSONValidator::validate(iss);
-        std::cout << "Successfull JSON nested object validation" << "\n\n";
+        std::cout << "Successfull JSON validation" << "\n\n";
         
     } catch (const InvalidJSONSyntax& e) {
-        std::cerr << e.what() << '\n';
+        std::cerr << "Invalid JSON stream: " << e.what() << '\n';
+    }
+}
+
+void testFileValidation(const String& filePath) {
+    std::ifstream file(filePath.C_str());
+    if (!file.is_open()) {
+        std::cerr << "Couldn't open file " << filePath << '\n';
+        return;
+    }
+    try {
+        JSONValidator::validate(file);
+        std::cout << "Successfull validation of " << filePath << '\n'; 
+        file.close();
+    } catch (const InvalidJSONSyntax& e) {
+        std::cerr << "Invalid JSON file: " << e.what() << '\n';
     }
 }
 
@@ -107,6 +123,6 @@ int main() {
     testArray("[1, true, null, \"string\"]");
     testObject("{\"name\": \"Mihail\", \"age\": 21, \"taken\": false, \"job\": null}");
     testNestedArray("[12, [true, null], \"string\"]");
-    testNestedObject("{\"student\": {\"name\": \"Mihail\", \"age\": 21, \"friends\": {\"name\": \"Atanas\"}}}");
+    testValidation("{\"student\": {\"name\": \"Mihail\", \"age\": 21, \"friends\": {\"name\": \"Atanas\"}}}");
     return 0;
 }
