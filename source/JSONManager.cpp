@@ -58,10 +58,10 @@ void JSONManager::open(const String& filePath) {
     file.clear();
     file.seekg(0);
 
-    char ch;
+    char character;
     bool isEmpty = true;
-    while (file.get(ch)) {
-        if (!std::isspace(ch)) {
+    while (file.get(character)) {
+        if (!std::isspace(character)) {
             isEmpty = false;
             break;
         }
