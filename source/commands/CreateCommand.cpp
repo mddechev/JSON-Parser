@@ -9,14 +9,15 @@ bool CreateCommand::execute(const Vector<String>& tokenizedCommand) {
         std::cerr << "Invalid create command. (create <path/to/key> value)" << '\n';
         return false;
     }
-   
-    InputStringStream inputStream(tokenizedCommand[2]);
+    String path(tokenizedCommand[1]);
+    InputStringStream inputStreamValue(tokenizedCommand[2]);
+
     try {
-        JSONValue* value = JSONFactory::getFactory().createValue(inputStream);
-        getManagerPtr()->create(tokenizedCommand[1], value);
+        JSONValue* valueToCreate = JSONFactory::getFactory().createValue(inputStreamValue);
+        getManagerPtr()->create(path, valueToCreate);
         return true;
     } catch (const CreationError& e) {
-        std::cerr << "Creation error from factory: " << e.what() << '\n';
+        std::cerr << "Invalid JSON value: " << e.what() << '\n';
         return false;
     }
 }
