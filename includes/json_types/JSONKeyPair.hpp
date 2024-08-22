@@ -29,11 +29,10 @@ public:
 
 public:
     void setValue(JSONValue* value);
-    // void setKey(const String& key);
 
     const String& getKey() const { return key; }
     String& getKey() { return key;}
-    
+
     const JSONValue* const getValue() const { return value; }
     JSONValue* getValue() { return value; }
 
