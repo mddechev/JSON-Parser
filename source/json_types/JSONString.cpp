@@ -13,11 +13,11 @@ JSONValue* JSONString::clone() const {
 }
 
 void JSONString::print(std::ostream &outputStream, size_t indent) const {
-    if (value[0] == DOUBLE_QUOTE || value[value.Length() - 2] == DOUBLE_QUOTE) {
-        outputStream << value;
-        return;
-    }
-    outputStream << DOUBLE_QUOTE << value << DOUBLE_QUOTE;
+    // if (value[0] != '\"' && value[value.Length() - 2] != '\"') {
+    //     outputStream << '\"' << value << '\"';
+    //     return;
+    // }
+    outputStream << value;
 }       
 
 bool JSONString::contains(const String &value) const {
