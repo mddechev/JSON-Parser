@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_MANAGER_HPP_
 #define _JSON_MANAGER_HPP_
 
@@ -10,11 +8,9 @@ class JSONManager {
 public:
     JSONManager();
     JSONManager(const JSONManager& other);
-    JSONManager(JSONManager&& other) noexcept;
     ~JSONManager();
 
     JSONManager& operator=(const JSONManager& other);
-    JSONManager& operator=(JSONManager&& other) noexcept;
 
     void open(const String& filePath);
 
@@ -46,7 +42,6 @@ public:
 
 private:
     void copy(const JSONManager& other);
-    void move(JSONManager&& other) noexcept;
     void free();
     void checkFileOpen() const;
     void saveToFile(const String& fileName) const;
