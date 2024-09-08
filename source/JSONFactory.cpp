@@ -30,20 +30,19 @@ JSONValue* JSONFactory::createValue(std::istream& inputStream) {
     } else if (firstChar == 't' || firstChar == 'f') {
         return createBool(inputStream);
 
-    } else if (firstChar == DOUBLE_QUOTE) {
+    } else if (firstChar == constants::STRING_OPENING_QUOTE) {
         return createString(inputStream); 
 
-    } else if (firstChar == ARRAY_OPENING_BRACKET) {
+    } else if (firstChar == constants::ARRAY_OPENING_BRACKET) {
         return createArray(inputStream);
 
-    } else if (firstChar == OBJECT_OPENING_BRACKET) {
+    } else if (firstChar == constants::OBJECT_OPENING_BRACKET) {
         return createObject(inputStream);
 
     } else {
         throw CreationError("Invalid character in factory");
     }
 }
-
 
 JSONValue* JSONFactory::createNumber(std::istream &inputStream) {
     return new JSONNumber(JSONParser::parseNumber(inputStream));
