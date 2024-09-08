@@ -1,7 +1,7 @@
 #include "../includes/commands/CloseCommand.hpp"
 
 CloseCommand::CloseCommand(JSONManager* const managerPtr)
-    :Command(CLOSE_COMMAND_NAME, managerPtr) {}
+    :Command(constants::CLOSE_COMMAND_NAME, managerPtr) {}
 
 bool CloseCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {
@@ -14,6 +14,8 @@ bool CloseCommand::execute(const Vector<String>& tokenizedCommand) {
         <<   '\n' << "Do you want to save them (y/n): ";
         while (true) {
             std::cin >> userInput;
+            std::cin.ignore();
+            
             userInput = std::tolower(userInput);
             
             if (userInput == 'y') {
