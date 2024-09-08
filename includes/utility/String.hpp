@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _STRING_HPP_
 #define _STRING_HPP_
 
@@ -72,9 +70,9 @@ private:
     void Free();
 
 private:
-    char* data;
     size_t capacity;
     size_t size;
+    char* data;
 };
 
 class InputStringStream: public std::istringstream {
