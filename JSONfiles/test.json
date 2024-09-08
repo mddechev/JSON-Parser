@@ -1,0 +1,15 @@
+{
+  "student": {
+      "fullName": {
+          "firstName": "..",
+          "lastName": ".."
+      },
+      "grades": [
+          {
+              "txtVal": "..",
+              "numVal": 12
+          }
+      ]
+
+  }
+}
