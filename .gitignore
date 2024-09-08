@@ -16,3 +16,5 @@ source/commands/MoveCommand.cpp.
 
 # local MacOS specific files
 **/.DS_Store
+
+CMakeLists.txt
