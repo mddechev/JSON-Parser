@@ -17,11 +17,11 @@ KeyNotFound::KeyNotFound(const String& message, const String& key)
     :JSONException(message), key(key) {}
 
 const char* KeyNotFound::what() const noexcept {
+    //??String fullMessage(getMessage()) - didn't print the full msg when caught exception??
     static String fullMessage(getMessage());
     if (!key.IsEmpty()) {
-        fullMessage += ": \"";
+        fullMessage += " - ";
         fullMessage += key;
-        fullMessage += '\"';
     }
     return fullMessage.C_str();
 }
@@ -36,6 +36,7 @@ FileError::FileError(const String& message, const String& fileName)
     :JSONException(message), fileName(fileName) {}
 
 const char* FileError::what() const noexcept {
+    //??String fullMessage(getMessage()) - didn't print the full msg when caught exception??
     static String fullMessage(getMessage());
     fullMessage += ": ";
     fullMessage += fileName;
