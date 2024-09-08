@@ -2,15 +2,16 @@
 #include "../../includes/utility/Constants.hpp"
 #include "../../includes/json_types/JSONObject.hpp"
 #include "JSONException.hpp"
+#include "json_types/JSONValue.hpp"
 #include "utility/Vector.hpp"
 #include <cstddef>
 
 JSONArray::JSONArray(const JSONArray& other) {
-    copy(other);
+    copyFrom(other);
 }
 
 JSONArray::JSONArray(JSONArray&& other) noexcept {
-    move(std::move(other));
+    moveFrom(std::move(other));
 }
 
 JSONArray::~JSONArray() noexcept {
@@ -20,7 +21,7 @@ JSONArray::~JSONArray() noexcept {
 JSONArray& JSONArray::operator=(const JSONArray& other) {
     if (this != &other) {
         free();
-        copy(other);
+        copyFrom(other);
     }
     return *this;
 }
@@ -28,20 +29,20 @@ JSONArray& JSONArray::operator=(const JSONArray& other) {
 JSONArray& JSONArray::operator=(JSONArray&& other) noexcept {
     if (this != &other) {
         free();
-        move(std::move(other));
+        moveFrom(std::move(other));
     }
     return *this;
 }
 
 String JSONArray::toString() const {
-    String res = ARRAY_OPENING_BRACKET;
+    String res = constants::ARRAY_OPENING_BRACKET;
     for (size_t i = 0; i < values.Size(); i++) {
         if (i > 0) {
             res += ", ";
         }
         res += values[i]->toString();
     }
-    res += ARRAY_CLOSING_BRACKET;
+    res += constants::ARRAY_CLOSING_BRACKET;
     return res;
 }
 
@@ -50,7 +51,7 @@ JSONValue* JSONArray::clone() const {
 }
 
 void JSONArray::print(std::ostream &outputStream, size_t indent) const {
-    outputStream << ARRAY_OPENING_BRACKET << '\n';
+    outputStream << constants::ARRAY_OPENING_BRACKET << '\n';
         for (size_t i = 0; i < values.Size(); ++i) {
             if (i > 0) {
                 outputStream << ',' << '\n';
@@ -60,7 +61,7 @@ void JSONArray::print(std::ostream &outputStream, size_t indent) const {
         }
         outputStream << "\n";
         printIndent(outputStream, indent);
-        outputStream << ARRAY_CLOSING_BRACKET;
+        outputStream << constants::ARRAY_CLOSING_BRACKET;
 }
 
 void JSONArray::search(const String &key, Vector<JSONValue *> &searchResultsArray) const {
@@ -69,11 +70,12 @@ void JSONArray::search(const String &key, Vector<JSONValue *> &searchResultsArra
     }
 }
 
+//written with the help of Claude Ai
 void JSONArray::set(const Vector<String> &path, JSONValue *const value) {
-    //Claude ai
     if (path.IsEmpty()) {
         throw InvalidPathError("Invalid path for array");
     }
+    
     size_t index = std::stoul(path[0].C_str());
     if (index >= values.Size()) {
         throw std::out_of_range("Array index out of bounds");
@@ -91,6 +93,7 @@ void JSONArray::set(const Vector<String> &path, JSONValue *const value) {
     }
 }
 
+//written with the help of Claude Ai
 void JSONArray::create(const Vector<String>& path, JSONValue* const value) {
     if (path.IsEmpty()) {
         throw InvalidPathError("Empty path for create operation in array");
@@ -163,13 +166,14 @@ bool JSONArray::contains(const String &value) const {
     return false;
 }
 
+
 void JSONArray::free() {
     for (size_t i = 0; i < values.Size(); i++) {
         delete values[i];
     }
 }
 
-void JSONArray::copy(const JSONArray& other) {
+void JSONArray::copyFrom(const JSONArray& other) {
     this->values.Reserve(other.values.Size());
 
     for (size_t i = 0; i < other.values.Size(); i++) {
@@ -177,6 +181,6 @@ void JSONArray::copy(const JSONArray& other) {
     }
 }
 
-void JSONArray::move(JSONArray&& other) noexcept {
+void JSONArray::moveFrom(JSONArray&& other) noexcept {
     values = std::move(other.values);
 }
