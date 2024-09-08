@@ -4,40 +4,29 @@
 #include <new>
 
 String::String()
-    :data(nullptr), capacity(INITIAL_CAPACITY), size(INITIAL_SIZE) {
-    try {
-        AllocateByCapacity(capacity);
-    } catch (const std::bad_alloc& e) {
-        Free();
-        throw;
-    }
+    :capacity(INITIAL_CAPACITY), size(INITIAL_SIZE) {
+   
+    AllocateByCapacity(capacity);
 }
 
 String::String(size_t capacity)
-    :data(nullptr), size(INITIAL_SIZE) {
-    try {
-        AllocateByCapacity(capacity);
-    } catch (const std::bad_alloc& e) {
-        Free();
-        throw;
-    }
+    : size(INITIAL_SIZE) {
+
+    AllocateByCapacity(capacity);
+    
 }
 
-String::String(const char* src)
-    :data(nullptr) {
+String::String(const char* src) {
    try {
         AllocateAndCopy(src);
    } catch (const std::invalid_argument& e) {
         Free();
         throw;
-   } catch (const std::bad_alloc& e) {
-        Free();
-        throw;
    }
 }
 
-String::String(const String& other) 
-    :data(nullptr) {
+String::String(const String& other) {
+    
     Copy(other);
 }
 
@@ -139,7 +128,6 @@ std::ostream& operator<<(std::ostream& os, const String& str) {
 
 std::istream& operator>>(std::istream& is, String& str) {
     char ch;
-    // while((ch = is.get())) {
     while(is.get(ch)) {
         if (ch == ' ' || ch == '\n') {
             break;
@@ -206,13 +194,13 @@ bool String::IsEmpty() const {
 }
 
 void String::Clear() {
-    // Free();
-    // capacity = 0;
-    // size = 0;
-    if (data) {
-        data[0] = '\0';
-    }
+    Free();
+    capacity = 0;
     size = 0;
+    // if (data) {
+    //     data[0] = '\0';
+    // }
+    // size = 0;
 }
 
 void String::Reuse() {
@@ -233,10 +221,10 @@ String String::Substr(size_t pos, int len) const {
     strncpy(substrData, data + pos, len);
     substrData[len] = '\0';
 
-    String result(substrData);
-    delete[] substrData;
+    // String result(substrData);
+    // delete[] substrData;
 
-    return result;
+    return String(substrData);
 }
 
 bool String::Contains(const String& other) const {
@@ -249,9 +237,6 @@ bool String::Contains(const char* other) const {
 
 void String::Resize(size_t newCapacity) {
     char* newData = new char[newCapacity];
-    if (!newData) {
-        throw std::bad_alloc();
-    }
     strcpy(newData, data);
 
     delete[] data;
@@ -261,9 +246,7 @@ void String::Resize(size_t newCapacity) {
 
 void String::AllocateByCapacity(size_t capacity) {
     this->data = new char[capacity];
-    if (!this->data) {
-        throw std::bad_alloc();
-    }
+   
     this->data[0] = '\0';
     this->capacity = capacity;
 }
@@ -277,19 +260,14 @@ void String::AllocateAndCopy(const char* src) {
     capacity = (size + 1) * INCREMENT_STEP;
     // capacity = size * INCREMENT_STEP;
     data = new char[capacity];
-    if (!data) {
-        throw std::bad_alloc();
-    }
     strcpy(data, src);
 }
 
 
 void String::Copy(const String& other) {
     this->data = new char[strlen(other.data) + 1];
-    if (!this->data) {
-        throw std::bad_alloc(); 
-    }
     strcpy(this->data, other.data);
+    
     this->capacity = other.capacity;
     this->size = other.size;
 }

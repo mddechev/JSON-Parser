@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _VECTOR_HPP_
 #define _VECTOR_HPP_
 
@@ -63,43 +61,35 @@ private:
     static const size_t INCREMENT_STEP = 2;
 
 private:
-    T* data;
     size_t capacity;
     size_t size;
+    T* data;
 };
 
 template<typename T>
 Vector<T>::Vector()
-    :data(nullptr), capacity(INITIAL_CAPACITY), size(INITIAL_SIZE)
+    :capacity(INITIAL_CAPACITY), size(INITIAL_SIZE), data(new T[capacity])
 {
-    data = new T[capacity];
-    if (!data) {
-        throw std::bad_alloc();
-    }
+    // data = new T[capacity];
 }
 
 template<typename T>
 Vector<T>::Vector(size_t capacity)
-    :data(nullptr), size(INITIAL_SIZE)
+    : capacity(capacity), size(INITIAL_SIZE), data(new T[capacity])
 {
-    this->data = new T[capacity];
-    if (!this->data) {
-        throw std::bad_alloc();
-    }
-    this->capacity = capacity;
+    // this->data = new T[capacity];
+    // this->capacity = capacity;
 }
 
 template<typename T>
 Vector<T>::Vector(size_t size, const T& defaultVal)
-    :data(nullptr)
+   : capacity(size* INCREMENT_STEP), size(size), data(new T[capacity])
 {
     
-    this->size = size;
-    this->capacity = size * INCREMENT_STEP;
-    this->data= new T[this->capacity];
-    if (!this->data) {
-        throw std::bad_alloc();
-    }
+    // this->size = size;
+    // this->capacity = size * INCREMENT_STEP;
+    // this->data= new T[this->capacity];
+    
     for (size_t i = 0; i < size; i++) {
         this->data[i] = defaultVal;
     }
@@ -140,18 +130,12 @@ Vector<T>& Vector<T>::operator=(Vector<T>&& other) noexcept {
 
 template<typename T>
 T& Vector<T>::operator[](size_t position) {
-    if (position >= size) {
-        throw std::out_of_range("Position out of range!");
-    }
-    return data[position];
+    return At(position);
 }
 
 template<typename T>
 const T& Vector<T>::operator[](size_t position) const {
-    if (position >= size) {
-        throw std::out_of_range("Position out of range!");
-    }
-    return data[position];
+    return At(position);
 }
 
 template<typename T>
@@ -172,11 +156,17 @@ void Vector<T>::PushBack(T&& value) {
 
 template<typename T>
 const T& Vector<T>::At(size_t index) const {
+    if (index >= size) {
+        throw std::out_of_range("Position out of range!");
+    }
     return data[index];
 }
 
 template<typename T>
 T& Vector<T>::At(size_t index) {
+    if (index >= size) {
+        throw std::out_of_range("Position out of range!");
+    }
     return data[index];
 }
 
@@ -258,9 +248,6 @@ template <typename T>
 void Vector<T>::Reserve(size_t newCapacity) {
     if (newCapacity > capacity) {
         T* newData = new T[newCapacity];
-        if (!newData) {
-            throw std::bad_alloc();
-        }
 
         for (size_t i = 0; i < size; i++) {
             newData[i] = std::move(data[i]);
@@ -276,9 +263,7 @@ template<typename T>
 void Vector<T>::Resize(size_t step) {
     size_t newCap = capacity * step;
     T* newData = new T[newCap];
-    if (!newData) {
-        throw std::bad_alloc();
-    }
+    
     for (size_t i = 0; i < size; i++) {
         newData[i] = data[i];
     }
