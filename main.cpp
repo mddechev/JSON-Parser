@@ -1,7 +1,7 @@
-#include "../JSON_PARSER/includes/Startup.hpp"
+#include "../JSON_PARSER/includes/ProgramStarter.hpp"
 
 int main() {
-    // Startup::runDemo();
-    Startup::run();
+    // ProgramStarter::runDemo();
+    ProgramStarter::run();
     return 0;
 }
