@@ -32,14 +32,16 @@ namespace helpers {
         }    
     }
 
+    //list of commands box written by claude Ai
     void printInfo(std::ostream& outputStream) {
-        outputStream << "\n╔══════════════════ LIST  OF COMMANDS  ═════════════════╗\n"
-                     <<   "║ validate <path/to/file>  open <path/to/file>          ║\n"
-                     <<   "║ print                    set <path/to/value> <value>  ║\n"
-                     <<   "║ create <path> <value>    delete <path/to/value>       ║\n"
-                     <<   "║ save                     saveas <path/to/file>        ║\n"
-                     <<   "║ close                    exit                         ║\n"
-                     <<   "╚═══════════════════════════════════════════════════════╝\n\n";
+        outputStream << "\n╔═════════════════════════ LIST  OF COMMANDS ════════════════════════════╗\n"
+                     <<   "║      validate <path/to/file>         open <path/to/file>               ║\n"
+                     <<   "║      print                           set <path/to/value> <value>       ║\n"
+                     <<   "║      create <path> <value>           delete <path/to/value>            ║\n"
+                          "║      search <key>                    contains <value>                  ║\n"
+                     <<   "║      save                            saveas <path/to/file>             ║\n"
+                     <<   "║      close                           exit                              ║\n"
+                     <<   "╚════════════════════════════════════════════════════════════════════════╝\n\n";
     }
 
     bool isDigit(const char character) {
