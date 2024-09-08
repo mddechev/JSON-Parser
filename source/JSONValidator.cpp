@@ -5,12 +5,22 @@
 
 void JSONValidator::validate(std::istream &inputStream) {
     char firstChar;
-    while (inputStream.get(firstChar) && std::isspace(firstChar)) {}
+    // while (inputStream.get(firstChar) && std::isspace(firstChar)) {}
 
-    if (inputStream.eof()) {
-        return; //empty file counts as valid
+    // if (inputStream.eof()) {
+    //     return; //empty file counts as valid
+    // }
+
+    bool isEmpty = true;
+    while (inputStream.get(firstChar)) {
+        if (!std::isspace(firstChar)) {
+            isEmpty = false;
+            break;
+        }
     }
-
+    if (isEmpty) {
+        return;//empty file counts as valid
+    }
     inputStream.unget();
 
     validateValue(inputStream);
@@ -37,13 +47,13 @@ void JSONValidator::validateValue(std::istream& inputStream) {
     } else if (firstChar == 't' || firstChar == 'f') {
         validateBool(inputStream);
 
-    } else if (firstChar == DOUBLE_QUOTE) {
+    } else if (firstChar == constants::STRING_OPENING_QUOTE) {
         validateString(inputStream);
 
-    } else if (firstChar == ARRAY_OPENING_BRACKET) {
+    } else if (firstChar == constants::ARRAY_OPENING_BRACKET) {
         validateArray(inputStream);
 
-    } else if (firstChar == OBJECT_OPENING_BRACKET) {
+    } else if (firstChar == constants::OBJECT_OPENING_BRACKET) {
         validateObject(inputStream);
 
     } else {
@@ -64,7 +74,7 @@ void JSONValidator::validateNumber(std::istream& inputStream) {
 void JSONValidator::validateNull(std::istream &inputStream) {
     String nullStr;
     char character;
-    for (size_t i = 0; i < NULL_LEN; i++) {
+    for (size_t i = 0; i < 4; i++) {
         inputStream.get(character);
         nullStr += character;
     }
@@ -88,16 +98,18 @@ void JSONValidator::validateString(std::istream &inputStream) {
 
     char character;
     inputStream >> character;
-    if (character != DOUBLE_QUOTE) {
+
+    if (character != constants::STRING_OPENING_QUOTE) {
         throw InvalidJSONSyntax("Invalid JSON strng: string must begin with \"");
     }
+
     inputStream.unget();
 
     while (inputStream.get(character)) {
-        if (character == DOUBLE_QUOTE) {
+        if (character == '\"') {
             quotesCounter++;
         }
-        if (quotesCounter == 2 || character =='\n') {
+        if (quotesCounter == 2 || character == '\n') {
             break;
         }
     }
@@ -110,12 +122,12 @@ void JSONValidator::validateArray(std::istream &inputStream) {
     char character;
     inputStream >> character;
 
-    if (character != ARRAY_OPENING_BRACKET) {
+    if (character != constants::ARRAY_OPENING_BRACKET) {
         throw InvalidJSONSyntax("Invald JSON array: array must start with '['");
     }
 
     inputStream >> character;
-    if (character == ARRAY_CLOSING_BRACKET) {
+    if (character == constants::ARRAY_CLOSING_BRACKET) {
         //validating empty array
         return;
     }
@@ -126,32 +138,30 @@ void JSONValidator::validateArray(std::istream &inputStream) {
 
         inputStream >> character;
 
-        if (character == ':' || character == '.') {
-            throw InvalidJSONSyntax("Expected a ',' after a value in array");
-        }
         if (character != ',') {
             break;
         }
     }
     inputStream.unget();
     inputStream >> character;
-    if (character != ARRAY_CLOSING_BRACKET) {
+    if (character != constants::ARRAY_CLOSING_BRACKET) {
         throw InvalidJSONSyntax("Invalid JSON array: array must end with ']'");
     }
 }
 
+
+//Written with the help of Claude Ai
 void JSONValidator::validateObject(std::istream &inputStream) {
     char character;
     inputStream >> character;
 
-    if (character != OBJECT_OPENING_BRACKET) {
+    if (character != constants::OBJECT_OPENING_BRACKET) {
         throw InvalidJSONSyntax("Invalid JSON object: object must begin with '{'");
     }
 
     inputStream >> character;
 
-    if (character == OBJECT_CLOSING_BRACKET) {
-        //validating empty object
+    if (character == constants::OBJECT_CLOSING_BRACKET) {
         return;
     }
 
@@ -161,7 +171,7 @@ void JSONValidator::validateObject(std::istream &inputStream) {
         if (!firstPair) {
             inputStream >> character;
 
-            if (character == OBJECT_CLOSING_BRACKET) {
+            if (character == constants::OBJECT_CLOSING_BRACKET) {
                 break;
             }
             if (character != ',') {
@@ -169,24 +179,21 @@ void JSONValidator::validateObject(std::istream &inputStream) {
             }
         }
 
-        // Validate key
         inputStream >> character;
 
-        if (character != DOUBLE_QUOTE) {
+        if (character != constants::STRING_OPENING_QUOTE) {
             throw InvalidJSONSyntax("Invalid object: key must be a \"string\"");
         }
 
         inputStream.unget();
         validateString(inputStream);
 
-        // Validate colon
         inputStream >> character;
         
         if (character != ':') {
             throw InvalidJSONSyntax("Invalid key-value pair: expected ':' after key");
         }
 
-        // Validate value
         validateValue(inputStream);
 
         firstPair = false;
