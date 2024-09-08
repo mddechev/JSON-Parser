@@ -12,10 +12,11 @@
 #include "../../includes/commands/CreateCommand.hpp"
 #include "../../includes/commands/DeleteCommand.hpp"
 #include "../../includes/commands/MoveCommand.hpp"
+#include "JSONException.hpp"
 #include "utility/Constants.hpp"
 
 CommandHandler::CommandHandler(JSONManager* const managerPtr) {
-    Command* supportedCommands[SUPPORTED_COMMANDS_COUNT] = {
+    Command* supportedCommands[constants::SUPPORTED_COMMANDS_COUNT] = {
         new ValidateCommand(managerPtr),
         new PrintCommand(managerPtr),
         new OpenCommand(managerPtr),
@@ -30,7 +31,7 @@ CommandHandler::CommandHandler(JSONManager* const managerPtr) {
         new DeleteCommand(managerPtr),
     };
     
-    for (size_t i = 0; i < SUPPORTED_COMMANDS_COUNT; i++) {
+    for (size_t i = 0; i < constants::SUPPORTED_COMMANDS_COUNT; i++) {
         this->supportedCommands.PushBack(supportedCommands[i]);
     }
 }
@@ -49,7 +50,7 @@ bool CommandHandler::handle(const String &command) {
     }
     
     try {
-        Command* fetchedCommand = getCommandByName(tokenizedCommand[0]);
+        Command* fetchedCommand = fetchCommandByName(tokenizedCommand[0]);
 
         if (!fetchedCommand) {
             std::cerr << "Command not found. Please enter valid command" << '\n';
@@ -58,15 +59,22 @@ bool CommandHandler::handle(const String &command) {
 
         return fetchedCommand->execute(tokenizedCommand);
         
-    } catch (const std::exception& e) {
+    } catch (const JSONException& e) {
         std::cerr << e.what() << '\n';
         return true;
     }
+    // } catch (const KeyNotFound& e) {
+    //     std::cerr << e.what() << '\n';
+    //     return true;
+    // }  catch (const JSONException& e) {
+    //     std::cerr << e.what() << '\n';
+    //     return true;
+    // }
 }
 
-Command* CommandHandler::getCommandByName(const String& name) const {
+Command* CommandHandler::fetchCommandByName(const String& commandName) const {
     for (size_t i = 0; i < supportedCommands.Size(); i++) {
-        if (supportedCommands[i]->getCommandName() == name) {
+        if (supportedCommands[i]->getCommandName() == commandName) {
             return supportedCommands[i];
         }
     }
