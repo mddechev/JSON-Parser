@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_EXCEPTION_HPP_
 #define _JSON_EXCEPTION_HPP_
 

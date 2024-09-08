@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _OPEN_COMMAND_HPP_
 #define _OPEN_COMMAND_HPP_
 

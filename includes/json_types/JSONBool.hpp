@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_BOOL_HPP_
 #define _JSON_BOOL_HPP_
 
@@ -16,7 +14,7 @@ public:
     void print(std::ostream &outputStream = std::cout, size_t indent = 0) const override;
 
     bool contains(const String &value) const override;
-    
+
 private:
     bool value;
 };

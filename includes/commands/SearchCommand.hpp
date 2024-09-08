@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _SEARCH_COMMAND_HPP_
 #define _SEARCH_COMMAND_HPP_
 

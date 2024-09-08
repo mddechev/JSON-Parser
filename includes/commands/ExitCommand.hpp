@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _EXIT_COMMAND_HPP_
 #define _EXIT_COMMAND_HPP_
 

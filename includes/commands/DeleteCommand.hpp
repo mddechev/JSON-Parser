@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _DELETE_COMMAND_HPP_
 #define _DELETE_COMMAND_HPP_
 

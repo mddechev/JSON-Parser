@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_ARRAY_HPP_
 #define _JSON_ARRAY_HPP_
 
@@ -35,8 +33,8 @@ public:
     Vector<JSONValue*>& getValues() { return values; }
     
 private:
-    void copy(const JSONArray& other);
-    void move(JSONArray&& other) noexcept;
+    void copyFrom(const JSONArray& other);
+    void moveFrom(JSONArray&& other) noexcept;
     void free();
     
 private:

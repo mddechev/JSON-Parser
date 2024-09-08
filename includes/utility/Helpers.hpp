@@ -1,7 +1,5 @@
-#pragma once
-
 #ifndef _HELPERS_HPP_
-#define macro _HELPERS_HPP_
+#define _HELPERS_HPP_
 
 #include "../utility/String.hpp"
 #include "../utility/Vector.hpp"

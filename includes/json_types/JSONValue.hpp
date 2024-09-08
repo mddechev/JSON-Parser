@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_VALUE_HPP_
 #define _JSON_VALUE_HPP_
 
@@ -27,7 +25,7 @@ public:
 
     virtual void remove(const Vector<String>& path);
 
-    virtual bool contains(const String& value) const;
+    virtual bool contains(const String& value) const = 0;
     
 protected:
     static void printIndent(std::ostream& outputStream, size_t indent);

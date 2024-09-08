@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _PRINT_COMMAND_HPP_
 #define _PRINT_COMMAND_HPP_
 

@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_FACTORY_HPP_
 #define _JSON_FACTORY_HPP_
 

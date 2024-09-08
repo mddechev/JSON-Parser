@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _VALIDATE_COMMAND_HPP_
 #define _VALIDATE_COMMAND_HPP_
 

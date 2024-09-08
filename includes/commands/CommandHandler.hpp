@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _COMMAND_HANDLER_HPP_
 #define _COMMAND_HANDLER_HPP_
 
@@ -15,7 +13,7 @@ public:
     bool handle(const String& commandName);
 
 private:
-    Command* getCommandByName(const String& commandName) const;
+    Command* fetchCommandByName(const String& commandName) const;
 
 private:
     Vector<Command*> supportedCommands;

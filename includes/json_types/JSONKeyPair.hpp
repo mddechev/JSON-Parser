@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_KEY_PAIR_HPP_
 #define _JSON_KEY_PAIR_HPP_
 
@@ -28,8 +26,6 @@ public:
     bool contains(const String& value) const;
 
 public:
-    void setValue(JSONValue* value);
-
     const String& getKey() const { return key; }
     String& getKey() { return key;}
 
@@ -38,10 +34,11 @@ public:
 
 private:
     static void printIndent(std::ostream& outputStream, size_t indent);
-    
+
 private:
-    void copy(const JSONKeyPair& other);
-    void move(JSONKeyPair&& other) noexcept; 
+    void setValue(JSONValue* value);
+    void copyFrom(const JSONKeyPair& other);
+    void moveFrom(JSONKeyPair&& other) noexcept; 
     void free();
 
 private:

@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_NULL_HPP_
 #define _JSON_NULL_HPP_
 

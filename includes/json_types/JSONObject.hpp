@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_OBJECT_HPP_
 #define _JSON_OBJECT_HPP_
 
@@ -38,8 +36,8 @@ public:
 private:
     JSONKeyPair* getPair(const String& key);
     size_t getValueIndex(const String& key) const;
-    void copy(const JSONObject& other);
-    void move(JSONObject&& other) noexcept;
+    void copyFrom(const JSONObject& other);
+    void moveFrom(JSONObject&& other) noexcept;
     void free();
 
 private:

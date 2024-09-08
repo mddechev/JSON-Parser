@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _JSON_PARSER_HPP_
 #define _JSON_PARSER_HPP_
 

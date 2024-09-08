@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _CREATE_COMMAND_HPP_
 #define _CREATE_COMMAND_HPP_
 

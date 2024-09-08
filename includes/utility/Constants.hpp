@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _CONSTANTS_HPP_
 #define _CONSTANTS_HPP_
 
@@ -11,7 +9,7 @@ namespace constants {
     const char ARRAY_CLOSING_BRACKET = ']';
     const char OBJECT_OPENING_BRACKET = '{';
     const char OBJECT_CLOSING_BRACKET = '}';
-    const char DOUBLE_QUOTE = '\"';
+    const char STRING_OPENING_QUOTE = '\"';
 
     const char OPEN_COMMAND_NAME[] = "open";
     const char VALIDATE_COMMAND_NAME[] = "validate";
@@ -23,7 +21,6 @@ namespace constants {
     const char SAVE_COMMAND_NAME[] = "save";
     const char SAVE_AS_COMMAND_NAME[] = "saveas";
     const char PRINT_COMMAND_NAME[] = "print";
-    const char MOVE_COMMAND_NAME[] = "move";
     const char CONTAINS_COMMAND_NAME[] = "contains";
     const char SEARCH_COMMAND_NAME[] = "search";
 
