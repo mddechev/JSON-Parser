@@ -3,7 +3,7 @@
 const String JSONNull::value = "null";
 
 void JSONNull::print(std::ostream &outputStream, size_t indent) const {
-    outputStream << JSONNull::value;
+    outputStream << value;
 }
 
 String JSONNull::toString() const {
