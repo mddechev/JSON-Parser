@@ -3,6 +3,7 @@
 #include "../includes/JSONFactory.hpp"
 #include "../includes/JSONValidator.hpp"
 #include <fstream>
+#include <ios>
 #include "../includes/utility/Helpers.hpp"
 #include "../includes/json_types/JSONObject.hpp"
 #include "utility/Vector.hpp"
@@ -14,12 +15,7 @@ JSONManager::JSONManager(const JSONManager& other) {
     copy(other);
 }
 
-JSONManager::JSONManager(JSONManager&& other) noexcept {
-    move(std::move(other));
-}
-
 JSONManager::~JSONManager() {
-    // delete root;
     free();
 }
 
@@ -30,15 +26,6 @@ JSONManager& JSONManager::operator=(const JSONManager& other) {
     }
     return *this;
 }
-
-JSONManager& JSONManager::operator=(JSONManager&& other) noexcept {
-    if (this != &other) {
-        free();
-        move(std::move(other));
-    }
-    return *this;
-}
-
 
 void JSONManager::open(const String& filePath) {
     if(isFileOpen) {
@@ -99,23 +86,27 @@ void JSONManager::saveAs(const String &filePath) const {
 
 void JSONManager::close() {
     checkFileOpen();
-    // delete root;
-    // root = nullptr;
-    // isFileOpen = false;
     free();
 }
 
 void JSONManager::print(std::ostream& outputStream) const {
-    if (root) {
-        root->print(outputStream);
-    } else {
+    // if (root) {
+    //     root->print(outputStream);
+    // } else {
+    //     outputStream << "No JSON data loaded to print" << '\n';
+    // }
+    // outputStream << '\n';
+    if(!root) {
         outputStream << "No JSON data loaded to print" << '\n';
+        return;
     }
+    root->print(outputStream);
     outputStream << '\n';
 }
 
 void JSONManager::validate(const String& filePath) const {
     std::ifstream file(filePath.C_str());
+
     if (!file.is_open()) {
         throw FileError("Couldn't open", filePath);
     }
@@ -125,8 +116,10 @@ void JSONManager::validate(const String& filePath) const {
 
 Vector<JSONValue*> JSONManager::search(const String& key) const {
     checkFileOpen();
+
     Vector<JSONValue*> searchResultsArray;
     root->search(key, searchResultsArray);
+
     return searchResultsArray;
 }
 
@@ -155,6 +148,7 @@ void JSONManager::create(const String& path, JSONValue* const value) {
         throw InvalidPathError("Empty path for create operation");
     }
 
+    //if file is empty create an object
     if (!root) {
         root = new JSONObject;
     }
@@ -177,9 +171,6 @@ void JSONManager::remove(const String& path) {
         throw JSONException("No JSON data loaded to remove");
     }
     
-    // if (tokenizedPath.IsEmpty()) {
-    //     throw InvalidPathError("Empty path for remove operation");
-    // }
     root->remove(tokenizedPath);
     isModified = true;
 }
@@ -197,7 +188,7 @@ bool JSONManager::contains(const String &value) const {
 
 void JSONManager::checkFileOpen() const {
     if(!isFileOpen) {
-            throw std::runtime_error("No JSON document currently loaded");
+            throw JSONException("No JSON document currently loaded");
     }   
 }
 
@@ -212,6 +203,7 @@ void JSONManager::saveToFile(const String& filePath) const{
     root->print(destinationFile);
 
     destinationFile.close();
+
     if (destinationFile.fail()) {
         throw FileError("Error occured while saving the file", filePath);
     }
@@ -229,17 +221,6 @@ void JSONManager::copy(const JSONManager& other) {
     this->currentFilePath = other.currentFilePath;
     this->isFileOpen = other.isFileOpen;
     this->isModified = other.isModified;
-}
-
-void JSONManager::move(JSONManager&& other) noexcept {
-    this->root = other.root;
-    this->currentFilePath = std::move(other.currentFilePath);
-    this->isFileOpen = other.isFileOpen;
-    this->isModified = other.isModified;
-
-    other.root = nullptr;
-    other.isFileOpen = false;
-    other.isModified = false;
 }
 
 void JSONManager::free() {
