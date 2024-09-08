@@ -1,7 +1,7 @@
 #include "../includes/commands/ContainsCommand.hpp"
 
 ContainsCommand::ContainsCommand(JSONManager* const managerPtr)
-    :Command(CONTAINS_COMMAND_NAME, managerPtr) {}
+    :Command(constants::CONTAINS_COMMAND_NAME, managerPtr) {}
 
 bool ContainsCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {

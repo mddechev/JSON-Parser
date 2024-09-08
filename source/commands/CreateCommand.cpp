@@ -2,7 +2,7 @@
 #include "../includes/JSONFactory.hpp"
 
 CreateCommand::CreateCommand(JSONManager* const managerPtr)
-    :Command(CREATE_COMMAND_NAME, managerPtr) {}
+    :Command(constants::CREATE_COMMAND_NAME, managerPtr) {}
 
 bool CreateCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {

@@ -2,15 +2,19 @@
 
 
 SaveAsCommand::SaveAsCommand(JSONManager* const managerPtr)
-    :Command(SAVE_AS_COMMAND_NAME, managerPtr) {}
+    :Command(constants::SAVE_AS_COMMAND_NAME, managerPtr) {}
 
 bool SaveAsCommand::execute(const Vector<String>& tokenizedCmd) {
+
     if (!validate(tokenizedCmd)) {
         std::cerr << "Invalid saveas command. (saveas <path/to/file/name>)" << '\n';
         return false;
     }
-    getManagerPtr()->saveAs(tokenizedCmd[1]);
-    std::cout << "Saved to " << tokenizedCmd[1] << '\n'; 
+
+    String saveAsFilePath = tokenizedCmd[1];
+
+    getManagerPtr()->saveAs(saveAsFilePath);
+    std::cout << "Saved to " << saveAsFilePath << '\n'; 
     return true;
 }
 

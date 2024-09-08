@@ -1,9 +1,10 @@
 #include "../includes/commands/SearchCommand.hpp"
+#include "utility/Constants.hpp"
 #include <exception>
 #include <stdexcept>
 
 SearchCommand::SearchCommand(JSONManager* const managerPtr)
-    :Command(SEARCH_COMMAND_NAME, managerPtr) {}
+    :Command(constants::SEARCH_COMMAND_NAME, managerPtr) {}
 
 bool SearchCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {
@@ -11,14 +12,16 @@ bool SearchCommand::execute(const Vector<String>& tokenizedCommand) {
         return false;
     }
 
-    Vector<JSONValue*> searchResults = getManagerPtr()->search(tokenizedCommand[1]);
+    String keyForSearching = tokenizedCommand[1];
+
+    Vector<JSONValue*> searchResults = getManagerPtr()->search(keyForSearching);
 
     if (searchResults.IsEmpty()) {
-        std::cout  << "No values found for key: " << tokenizedCommand[1] << '\n';
+        std::cout  << "No values found for " << keyForSearching << '\n';
         return true;
     }
 
-    std::cout << "Search results for " << tokenizedCommand[1] << '\n';
+    std::cout << "Search results for " << keyForSearching << '\n';
     
     if (searchResults.Size() == 1) {
         searchResults[0]->print();
@@ -26,13 +29,13 @@ bool SearchCommand::execute(const Vector<String>& tokenizedCommand) {
         return true;
     }
 
-    std::cout << ARRAY_OPENING_BRACKET << '\n';
+    std::cout << constants::ARRAY_OPENING_BRACKET << '\n';
     for (size_t i = 0; i < searchResults.Size(); i++) {
-        std::cout << "  ";
+        std::cout << "   ";
         searchResults[i]->print();
         std::cout << '\n';
     }
-    std::cout << ARRAY_CLOSING_BRACKET << '\n';
+    std::cout << constants::ARRAY_CLOSING_BRACKET << '\n';
     return true;
 }
 

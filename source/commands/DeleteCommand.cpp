@@ -1,7 +1,7 @@
 #include "../includes/commands/DeleteCommand.hpp"
 
 DeleteCommand::DeleteCommand(JSONManager* const managerPtr)
-    :Command(DELETE_COMMAND_NAME, managerPtr) {}
+    :Command(constants::DELETE_COMMAND_NAME, managerPtr) {}
 
 bool DeleteCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {

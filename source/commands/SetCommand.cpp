@@ -1,9 +1,11 @@
 #include "../includes/commands/SetCommand.hpp"
 #include "../includes/JSONFactory.hpp"
+#include "JSONException.hpp"
 #include "JSONValidator.hpp"
+#include "json_types/JSONValue.hpp"
 
 SetCommand::SetCommand(JSONManager* const managerPtr)
-    :Command(SET_COMMAND_NAME, managerPtr) {}
+    :Command(constants::SET_COMMAND_NAME, managerPtr) {}
 
 bool SetCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {
@@ -14,13 +16,19 @@ bool SetCommand::execute(const Vector<String>& tokenizedCommand) {
     String path(tokenizedCommand[1]);
     InputStringStream inputStreamValue(tokenizedCommand[2]);   
 
+    JSONValue* valueToSet = nullptr;
     try {
         JSONValue* valueToSet = JSONFactory::getFactory().createValue(inputStreamValue);
 
         getManagerPtr()->set(path, valueToSet);
         return true;
 
-    } catch (const CreationError& e) {
+    } catch (const KeyNotFound& e) {
+        delete valueToSet;
+        std::cerr << "Invalid path: " << e.what() << '\n';
+        return false;
+    } 
+    catch (const CreationError& e) {
         std::cerr << "Invalid JSON value: " << e.what() << '\n';
         return false;
     }

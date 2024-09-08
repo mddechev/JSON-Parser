@@ -1,7 +1,7 @@
 #include "../includes/commands/ValidateCommand.hpp"
 
 ValidateCommand::ValidateCommand(JSONManager* const managerPtr)
-    :Command(VALIDATE_COMMAND_NAME, managerPtr) {}
+    :Command(constants::VALIDATE_COMMAND_NAME, managerPtr) {}
 
 bool ValidateCommand::validate(const Vector<String>& tokenizedCommand) {
     if ((tokenizedCommand.Size() != 2) || (tokenizedCommand[0] != getCommandName())) {

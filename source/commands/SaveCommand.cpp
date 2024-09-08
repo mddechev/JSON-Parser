@@ -3,7 +3,7 @@
 
 
 SaveCommand::SaveCommand(JSONManager* const managerPtr)
-    :Command(SAVE_COMMAND_NAME, managerPtr) {}
+    :Command(constants::SAVE_COMMAND_NAME, managerPtr) {}
 
 bool SaveCommand::execute(const Vector<String>& tokenizedCommand) {
     if (!validate(tokenizedCommand)) {
